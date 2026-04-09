@@ -1,0 +1,172 @@
+[
+  {
+    "id": "yachting-world",
+    "name": "Yachting World",
+    "type": "rss",
+    "url": "https://www.yachtingworld.com/feed",
+    "trust_score": 0.8,
+    "status": "active",
+    "linked_members": ["nimrod"],
+    "schedule": "daily"
+  },
+  {
+    "id": "sailing-totem",
+    "name": "Sailing Totem (Cruising Families)",
+    "type": "web",
+    "url": "https://www.sailingtotem.com",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["nimrod"],
+    "schedule": "daily"
+  },
+  {
+    "id": "iksurfmag",
+    "name": "IKSURFMAG",
+    "type": "rss",
+    "url": "https://www.iksurfmag.com/feed/",
+    "trust_score": 0.8,
+    "status": "active",
+    "linked_members": ["nimrod"],
+    "schedule": "daily"
+  },
+  {
+    "id": "surfertoday-kite",
+    "name": "SurferToday Kite",
+    "type": "web",
+    "url": "https://www.surfertoday.com/kiteboarding",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["nimrod"],
+    "schedule": "daily"
+  },
+  {
+    "id": "permaculture-mag",
+    "name": "Permaculture Magazine",
+    "type": "rss",
+    "url": "https://www.permaculture.co.uk/feed",
+    "trust_score": 0.8,
+    "status": "active",
+    "linked_members": ["nimrod", "michal"],
+    "schedule": "daily"
+  },
+  {
+    "id": "anthropic-blog",
+    "name": "Anthropic Blog",
+    "type": "rss",
+    "url": "https://www.anthropic.com/feed.xml",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["nimrod"],
+    "schedule": "daily"
+  },
+  {
+    "id": "archdaily",
+    "name": "ArchDaily",
+    "type": "rss",
+    "url": "https://www.archdaily.com/feed",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["michal"],
+    "schedule": "daily"
+  },
+  {
+    "id": "dezeen",
+    "name": "Dezeen",
+    "type": "rss",
+    "url": "https://www.dezeen.com/feed/",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["michal"],
+    "schedule": "daily"
+  },
+  {
+    "id": "mindful-org",
+    "name": "Mindful.org",
+    "type": "web",
+    "url": "https://www.mindful.org",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["michal"],
+    "schedule": "daily"
+  },
+  {
+    "id": "nature-chemistry",
+    "name": "Nature Chemistry",
+    "type": "rss",
+    "url": "https://www.nature.com/nchem.rss",
+    "trust_score": 0.95,
+    "status": "active",
+    "linked_members": ["shaked"],
+    "schedule": "daily"
+  },
+  {
+    "id": "royal-road",
+    "name": "Royal Road",
+    "type": "web",
+    "url": "https://www.royalroad.com/fictions/latest-updates/",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["shaked"],
+    "schedule": "daily"
+  },
+  {
+    "id": "circustalk",
+    "name": "CircusTalk",
+    "type": "web",
+    "url": "https://circustalk.com",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["maayan"],
+    "schedule": "daily"
+  },
+  {
+    "id": "numberphile",
+    "name": "Numberphile",
+    "type": "youtube",
+    "url": "https://www.youtube.com/@numberphile",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["tzlil"],
+    "schedule": "daily"
+  },
+  {
+    "id": "veritasium",
+    "name": "Veritasium",
+    "type": "youtube",
+    "url": "https://www.youtube.com/@veritasium",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["tzlil"],
+    "schedule": "daily"
+  },
+  {
+    "id": "ted-ed",
+    "name": "TED-Ed",
+    "type": "youtube",
+    "url": "https://www.youtube.com/@TEDEd",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": ["tzlil"],
+    "schedule": "daily"
+  },
+  {
+    "id": "mathpickle",
+    "name": "MathPickle",
+    "type": "web",
+    "url": "https://mathpickle.com",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["tzlil"],
+    "schedule": "daily"
+  },
+  {
+    "id": "mind-your-decisions",
+    "name": "Mind Your Decisions",
+    "type": "web",
+    "url": "https://mindyourdecisions.com/blog/",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": ["tzlil"],
+    "schedule": "daily"
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "schedule": {
+    "build_time": "09:00",
+    "send_time": "12:00",
+    "survey_time": "21:00",
+    "timezone": "Asia/Jerusalem",
+    "submission_cutoff_minutes_before_build": 30
+  },
+  "content": {
+    "max_items_total": 15,
+    "discovery_ratio": 0.2,
+    "duplicate_threshold_days": 30,
+    "min_relevance_score": 30,
+    "max_topic_ratio_per_member": 0.6
+  },
+  "newsletter": {
+    "url_base": "https://nimrod.bio/newsletter",
+    "family_name": "משפחת בן-צבי ולד",
+    "family_name_en": "Ben-Tzvi Wald Family"
+  },
+  "ftp": {
+    "remote_path": "/newsletter",
+    "retry_count": 3,
+    "retry_delay_seconds": 10
+  },
+  "distribution": {
+    "primary_channel": "whatsapp",
+    "fallback_channel": "email",
+    "whatsapp_provider": "twilio"
+  },
+  "ai": {
+    "summary_model": "claude-sonnet-4-6",
+    "summary_max_tokens": 200,
+    "headline_max_tokens": 50,
+    "greeting_max_tokens": 100,
+    "puzzle_max_tokens": 150,
+    "submission_edit_max_tokens": 300,
+    "survey_max_tokens": 100,
+    "bridge_max_tokens": 100
+  },
+  "budget": {
+    "daily_alert_usd": 0.50,
+    "monthly_alert_usd": 10.00
+  }
+}

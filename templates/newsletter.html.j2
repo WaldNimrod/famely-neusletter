@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Famely Neuslettr - {{ neo.date }}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f5f3ef; color: #3a3a3a; line-height: 1.75; direction: rtl; padding: 12px; }
+  .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #e8f0e4 0%, #d4e4cf 100%); padding: 32px 24px 28px; text-align: center; }
+  .header .logo { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #6b8f5e; margin-bottom: 6px; }
+  .header h1 { font-size: 24px; font-weight: 800; color: #2d3a28; margin-bottom: 4px; }
+  .header .date { font-size: 13px; color: #6b8f5e; }
+  .header .greeting { font-size: 15px; color: #4a6343; margin-top: 10px; font-style: italic; }
+
+  /* Sections */
+  .section { padding: 20px 24px 24px; border-bottom: 1px solid #f0ede8; }
+  .section:last-of-type { border-bottom: none; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .section-header .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .section-header h2 { font-size: 16px; font-weight: 700; color: #3a3a3a; }
+
+  /* Family submissions */
+  .family .icon { background: #fef3e2; }
+  .family-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; border-right: 3px solid #f0c873; }
+  .family-card .who { font-size: 12px; font-weight: 600; color: #c8942a; margin-bottom: 2px; }
+  .family-card p { font-size: 14px; color: #555; }
+
+  /* Member colors */
+  .nimrod .icon { background: #e6f0fa; } .nimrod .cat { color: #3b7dd8; } .nimrod .card { border-right-color: #3b7dd8; }
+  .michal .icon { background: #e6f5ed; } .michal .cat { color: #2d8e5e; } .michal .card { border-right-color: #2d8e5e; }
+  .shaked .icon { background: #ece6f5; } .shaked .cat { color: #6b3fa0; } .shaked .card { border-right-color: #6b3fa0; }
+  .maayan .icon { background: #fce8ec; } .maayan .cat { color: #c4304a; } .maayan .card { border-right-color: #c4304a; }
+  .tzlil .icon { background: #fef3e2; } .tzlil .cat { color: #b8860b; } .tzlil .card { border-right-color: #b8860b; }
+
+  /* Article card */
+  .card { background: #fafaf8; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; border-right: 3px solid #ddd; }
+  .card:hover { background: #f5f4f0; }
+  .card .cat { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+  .card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .card h3 a { color: #3a3a3a; text-decoration: none; }
+  .card h3 a:hover { text-decoration: underline; }
+  .card .excerpt { font-size: 13px; color: #777; line-height: 1.6; }
+  .card .meta { margin-top: 6px; font-size: 11px; color: #aaa; display: flex; gap: 6px; align-items: center; }
+  .lang-tag { font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; background: #eee; color: #888; }
+
+  /* Discovery */
+  .discovery .icon { background: #f0e6fa; }
+  .discovery-card { background: #faf7fd; border-radius: 12px; padding: 14px 16px; border: 1px dashed #d4c0ea; margin-bottom: 10px; }
+  .discovery-card .bridge { font-size: 12px; font-weight: 600; color: #7c50a8; margin-bottom: 6px; }
+  .discovery-card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .discovery-card h3 a { color: #3a3a3a; text-decoration: none; }
+  .discovery-card .excerpt { font-size: 13px; color: #777; }
+  .discovery-card .meta { margin-top: 6px; font-size: 11px; color: #aaa; }
+
+  /* Trivia */
+  .trivia .icon { background: #fef3e2; }
+  .trivia-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; border-right: 3px solid #daa520; }
+  .trivia-card h3 { font-size: 15px; font-weight: 700; color: #b8860b; margin-bottom: 6px; }
+  .trivia-card p { font-size: 14px; color: #555; line-height: 1.7; white-space: pre-line; }
+
+  /* Puzzle */
+  .puzzle-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; border-right: 3px solid #b8860b; margin-top: 8px; }
+  .puzzle-card .label { font-size: 12px; font-weight: 700; color: #b8860b; margin-bottom: 4px; }
+  .puzzle-card p { font-size: 14px; color: #555; line-height: 1.7; white-space: pre-line; }
+
+  /* Footer */
+  .footer { padding: 20px 24px; text-align: center; font-size: 12px; color: #bbb; border-top: 1px solid #f0ede8; }
+
+  /* LTR for English sections */
+  .ltr { direction: ltr; text-align: left; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header -->
+  <div class="header">
+    <div class="logo">Famely Neuslettr</div>
+    <h1>{{ neo.family_name }}</h1>
+    <div class="date">{{ neo.date }}</div>
+    <div class="greeting">{{ neo.greeting }}</div>
+  </div>
+
+  {% if neo.family_content %}
+  <!-- 2. Family Submissions -->
+  <div class="section family">
+    <div class="section-header">
+      <div class="icon">📮</div>
+      <h2>ידיעות מהמשפחה</h2>
+    </div>
+    {% for sub in neo.family_content %}
+    <div class="family-card">
+      <div class="who">{{ sub.member_name }} כותב/ת:</div>
+      <h3>{{ sub.headline }}</h3>
+      <p>{{ sub.summary }}</p>
+      {% if sub.link_url %}
+      <div class="meta"><a href="{{ sub.link_url }}" style="color: #c8942a;">קישור &larr;</a></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% set member_config = {
+    'nimrod': {'icon': '⛵', 'title': 'הפינה של נימרוד', 'class': 'nimrod'},
+    'michal': {'icon': '🌿', 'title': 'הפינה של מיכל', 'class': 'michal'},
+    'shaked': {'icon': '⚗️', 'title': "Shaked's Corner", 'class': 'shaked'},
+    'maayan': {'icon': '🎪', 'title': 'הפינה של יויו', 'class': 'maayan'},
+    'tzlil': {'icon': '🧮', 'title': 'הפינה של צליל', 'class': 'tzlil'}
+  } %}
+
+  <!-- 3-7. Member Sections -->
+  {% for section in neo.member_sections %}
+  {% set mc = member_config[section.member_id] %}
+  <div class="section {{ mc.class }}{% if section.language == 'en' %} ltr{% endif %}">
+    <div class="section-header">
+      <div class="icon">{{ mc.icon }}</div>
+      <h2>{{ mc.title }}</h2>
+    </div>
+    {% for item in section['items'] %}
+    <div class="card">
+      <div class="cat">{{ item.category }}</div>
+      <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+      <div class="excerpt">{{ item.summary }}</div>
+      <div class="meta">
+        {{ item.source_name }}
+        <span>&middot;</span>
+        {{ item.published_at[:10] if item.published_at else '' }}
+        {% if item.language == 'en' and section.language != 'en' %}
+        <span class="lang-tag">EN</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% if section.member_id == 'tzlil' and neo.trivia['puzzle'] %}
+    <!-- Puzzle for Tzlil -->
+    <div class="puzzle-card">
+      <div class="label">חידת היום 🧩</div>
+      <p>{{ neo.trivia['puzzle'] }}</p>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {% if neo.discovery %}
+  <!-- 8. Discovery -->
+  <div class="section discovery">
+    <div class="section-header">
+      <div class="icon">🔮</div>
+      <h2>גילוי היום</h2>
+    </div>
+    {% for item in neo.discovery %}
+    <div class="discovery-card">
+      <div class="bridge">{{ item.bridge_text }}</div>
+      <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+      <div class="excerpt">{{ item.summary }}</div>
+      <div class="meta">{{ item.source_name }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- 9. Trivia / Today in History -->
+  <div class="section trivia">
+    <div class="section-header">
+      <div class="icon">📜</div>
+      <h2>היום בהיסטוריה</h2>
+    </div>
+    <div class="trivia-card">
+      <p>{{ neo.trivia.get('history', neo.greeting) }}</p>
+    </div>
+  </div>
+
+  <!-- 10. Footer -->
+  <div class="footer">
+    Famely Neuslettr &middot; powered by AI with ❤️ &middot; גליון #{{ edition_number or '1' }}
+  </div>
+
+</div>
+</body>
+</html>
