@@ -1,11 +1,67 @@
+# --- Secrets & environment ---
 .env
-data/famely.db
-data/famely.db-journal
-data/famely.db-wal
-data/submissions/
-data/archive/
-logs/
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# --- Virtual environments ---
 .venv/
 venv/
+ENV/
+env/
+
+# --- Project data & SQLite ---
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/submissions/
+data/archive/
+
+# --- Runtime ---
+logs/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDE ---
+.idea/
+*.swp
+*~
