@@ -108,11 +108,11 @@ def score(ncis: list[NCI], family: FamilyConfig) -> dict[str, list[ScoredNCI]]:
             best_priority = "low"
 
             for interest in member.interests:
-                # Count keyword matches
+                # Count keyword matches — use threshold of 2 matches for full score
+                # This prevents penalizing members with many subtopics
                 text = (nci.title + ' ' + nci.raw_text + ' ' + ' '.join(nci.tags)).lower()
                 matches = sum(1 for kw in interest.subtopics if kw.lower() in text)
-                max_possible = max(len(interest.subtopics), 1)
-                keyword_match = min(matches / max_possible, 1.0)
+                keyword_match = min(matches / 2.0, 1.0)  # 2+ matches = full score
 
                 if keyword_match == 0:
                     continue
@@ -294,6 +294,9 @@ def generate_content(curated: dict[str, list[ScoredNCI]],
     survey_q = _generate_survey(tt, topic_list, today, model, settings)
     survey_q_en = _generate_survey_en(tt, topic_list, today, model, settings)
 
+    # 7. Today in history
+    history = _generate_history(tt, today, model, settings)
+
     return GeneratedContent(
         greeting=greeting,
         greeting_en=greeting_en,
@@ -305,6 +308,7 @@ def generate_content(curated: dict[str, list[ScoredNCI]],
         summaries=summaries,
         submission_edits=submission_edits,
         bridges=bridges,
+        history=history,
     )
 
 
@@ -515,6 +519,35 @@ def _generate_survey_en(tt, topics, today, model, settings):
         return "What did you think of today's newsletter?"
 
 
+def _generate_history(tt, today, model, settings):
+    """Generate a 'Today in History' fact in Hebrew."""
+    try:
+        return tt.generate("m3", "history",
+            f"Write a fascinating 'Today in History' fact for {today}.\n"
+            f"Hebrew. 2-3 sentences. Include the year and what happened.\n"
+            f"Pick something interesting for a family with kids aged 13-18.\n"
+            f"Topics: science, exploration, art, inventions, nature discoveries.\n"
+            f"Avoid wars and politics unless very significant.",
+            max_tokens=settings.ai.get('greeting_max_tokens', 100),
+            model=model, newsletter_date=today)
+    except Exception:
+        return f"ב-{today} קרו הרבה דברים מעניינים לאורך ההיסטוריה!"
+
+
+def _format_hebrew_date(today: str) -> str:
+    """Convert YYYY-MM-DD to Hebrew formatted date string."""
+    HEB_DAYS = ['שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת', 'ראשון']
+    HEB_MONTHS = ['', 'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
+                  'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר']
+    try:
+        dt = datetime.strptime(today, '%Y-%m-%d')
+        day_name = HEB_DAYS[dt.weekday()]
+        month_name = HEB_MONTHS[dt.month]
+        return f"יום {day_name}, {dt.day} ב{month_name} {dt.year}"
+    except (ValueError, IndexError):
+        return today
+
+
 def _collect_topics(curated):
     topics = set()
     for items in curated.values():
@@ -579,6 +612,7 @@ def _build_neo(curated, generated, submissions, family, settings,
                     'score': item.score,
                     'language': item.nci.language,
                     'published_at': item.nci.published_at,
+                    'image_url': item.nci.image_url,
                 })
 
         items_selected += len(section_items)
@@ -623,8 +657,10 @@ def _build_neo(curated, generated, submissions, family, settings,
         trivia={
             'puzzle': generated.puzzle,
             'answer': generated.puzzle_answer,
+            'history': generated.history,
         },
         survey_question=generated.survey_question,
+        date_formatted=_format_hebrew_date(today),
         metadata={
             'items_fetched': items_fetched,
             'items_after_dedup': items_after_dedup,

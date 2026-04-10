@@ -6,7 +6,9 @@
     "url": "https://www.yachtingworld.com/feed",
     "trust_score": 0.8,
     "status": "active",
-    "linked_members": ["nimrod"],
+    "linked_members": [
+      "nimrod"
+    ],
     "schedule": "daily"
   },
   {
@@ -16,7 +18,9 @@
     "url": "https://www.sailingtotem.com",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["nimrod"],
+    "linked_members": [
+      "nimrod"
+    ],
     "schedule": "daily"
   },
   {
@@ -26,7 +30,9 @@
     "url": "https://www.iksurfmag.com/feed/",
     "trust_score": 0.8,
     "status": "active",
-    "linked_members": ["nimrod"],
+    "linked_members": [
+      "nimrod"
+    ],
     "schedule": "daily"
   },
   {
@@ -36,7 +42,9 @@
     "url": "https://www.surfertoday.com/kiteboarding",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["nimrod"],
+    "linked_members": [
+      "nimrod"
+    ],
     "schedule": "daily"
   },
   {
@@ -46,7 +54,10 @@
     "url": "https://www.permaculture.co.uk/feed",
     "trust_score": 0.8,
     "status": "active",
-    "linked_members": ["nimrod", "michal"],
+    "linked_members": [
+      "nimrod",
+      "michal"
+    ],
     "schedule": "daily"
   },
   {
@@ -56,7 +67,9 @@
     "url": "https://www.anthropic.com/feed.xml",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["nimrod"],
+    "linked_members": [
+      "nimrod"
+    ],
     "schedule": "daily"
   },
   {
@@ -66,7 +79,9 @@
     "url": "https://www.archdaily.com/feed",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["michal"],
+    "linked_members": [
+      "michal"
+    ],
     "schedule": "daily"
   },
   {
@@ -76,7 +91,9 @@
     "url": "https://www.dezeen.com/feed/",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["michal"],
+    "linked_members": [
+      "michal"
+    ],
     "schedule": "daily"
   },
   {
@@ -86,7 +103,9 @@
     "url": "https://www.mindful.org",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["michal"],
+    "linked_members": [
+      "michal"
+    ],
     "schedule": "daily"
   },
   {
@@ -96,7 +115,9 @@
     "url": "https://www.nature.com/nchem.rss",
     "trust_score": 0.95,
     "status": "active",
-    "linked_members": ["shaked"],
+    "linked_members": [
+      "shaked"
+    ],
     "schedule": "daily"
   },
   {
@@ -106,7 +127,9 @@
     "url": "https://www.royalroad.com/fictions/latest-updates/",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["shaked"],
+    "linked_members": [
+      "shaked"
+    ],
     "schedule": "daily"
   },
   {
@@ -116,7 +139,9 @@
     "url": "https://circustalk.com",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["maayan"],
+    "linked_members": [
+      "maayan"
+    ],
     "schedule": "daily"
   },
   {
@@ -126,7 +151,9 @@
     "url": "https://www.youtube.com/@numberphile",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["tzlil"],
+    "linked_members": [
+      "tzlil"
+    ],
     "schedule": "daily"
   },
   {
@@ -136,7 +163,9 @@
     "url": "https://www.youtube.com/@veritasium",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["tzlil"],
+    "linked_members": [
+      "tzlil"
+    ],
     "schedule": "daily"
   },
   {
@@ -146,7 +175,9 @@
     "url": "https://www.youtube.com/@TEDEd",
     "trust_score": 0.9,
     "status": "active",
-    "linked_members": ["tzlil"],
+    "linked_members": [
+      "tzlil"
+    ],
     "schedule": "daily"
   },
   {
@@ -156,7 +187,9 @@
     "url": "https://mathpickle.com",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["tzlil"],
+    "linked_members": [
+      "tzlil"
+    ],
     "schedule": "daily"
   },
   {
@@ -166,7 +199,45 @@
     "url": "https://mindyourdecisions.com/blog/",
     "trust_score": 0.7,
     "status": "active",
-    "linked_members": ["tzlil"],
+    "linked_members": [
+      "tzlil"
+    ],
+    "schedule": "daily"
+  },
+  {
+    "id": "cirque-du-soleil-yt",
+    "name": "Cirque du Soleil",
+    "type": "youtube",
+    "url": "https://www.youtube.com/@CirsduSoleil",
+    "trust_score": 0.9,
+    "status": "active",
+    "linked_members": [
+      "maayan"
+    ],
+    "schedule": "daily"
+  },
+  {
+    "id": "dance-magazine",
+    "name": "Dance Magazine",
+    "type": "rss",
+    "url": "https://www.dancemagazine.com/feed/",
+    "trust_score": 0.8,
+    "status": "active",
+    "linked_members": [
+      "maayan"
+    ],
+    "schedule": "daily"
+  },
+  {
+    "id": "aerial-expo",
+    "name": "Aerial Expo Blog",
+    "type": "web",
+    "url": "https://aerialexpo.com/blog/",
+    "trust_score": 0.7,
+    "status": "active",
+    "linked_members": [
+      "maayan"
+    ],
     "schedule": "daily"
   }
 ]

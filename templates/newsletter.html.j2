@@ -7,26 +7,29 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f5f3ef; color: #3a3a3a; line-height: 1.75; direction: rtl; padding: 12px; }
-  .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+  .container { max-width: 620px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.08); }
 
-  /* Header */
-  .header { background: linear-gradient(135deg, #e8f0e4 0%, #d4e4cf 100%); padding: 32px 24px 28px; text-align: center; }
-  .header .logo { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #6b8f5e; margin-bottom: 6px; }
-  .header h1 { font-size: 24px; font-weight: 800; color: #2d3a28; margin-bottom: 4px; }
-  .header .date { font-size: 13px; color: #6b8f5e; }
-  .header .greeting { font-size: 15px; color: #4a6343; margin-top: 10px; font-style: italic; }
+  /* Header — rich gradient with family identity */
+  .header { background: linear-gradient(135deg, #e8f0e4 0%, #c9ddc3 50%, #b8d4af 100%); padding: 36px 24px 30px; text-align: center; position: relative; }
+  .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3b7dd8, #2d8e5e, #6b3fa0, #c4304a, #b8860b); }
+  .header .logo { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #6b8f5e; margin-bottom: 6px; }
+  .header h1 { font-size: 26px; font-weight: 800; color: #2d3a28; margin-bottom: 2px; }
+  .header .date { font-size: 14px; color: #6b8f5e; font-weight: 500; margin-bottom: 4px; }
+  .header .edition { font-size: 11px; color: #8aad7e; letter-spacing: 1px; }
+  .header .greeting { font-size: 15px; color: #4a6343; margin-top: 12px; font-style: italic; line-height: 1.6; }
 
   /* Sections */
-  .section { padding: 20px 24px 24px; border-bottom: 1px solid #f0ede8; }
+  .section { padding: 22px 24px 26px; border-bottom: 1px solid #f0ede8; }
   .section:last-of-type { border-bottom: none; }
-  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-  .section-header .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .section-header h2 { font-size: 16px; font-weight: 700; color: #3a3a3a; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .section-header .icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-header h2 { font-size: 17px; font-weight: 700; color: #3a3a3a; }
 
   /* Family submissions */
   .family .icon { background: #fef3e2; }
-  .family-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; border-right: 3px solid #f0c873; }
-  .family-card .who { font-size: 12px; font-weight: 600; color: #c8942a; margin-bottom: 2px; }
+  .family-card { background: #fefbf6; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; border-right: 4px solid #f0c873; }
+  .family-card .who { font-size: 12px; font-weight: 700; color: #c8942a; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .family-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
   .family-card p { font-size: 14px; color: #555; }
 
   /* Member colors */
@@ -36,42 +39,60 @@
   .maayan .icon { background: #fce8ec; } .maayan .cat { color: #c4304a; } .maayan .card { border-right-color: #c4304a; }
   .tzlil .icon { background: #fef3e2; } .tzlil .cat { color: #b8860b; } .tzlil .card { border-right-color: #b8860b; }
 
-  /* Article card */
-  .card { background: #fafaf8; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; border-right: 3px solid #ddd; }
+  /* Article card — with image support */
+  .card { background: #fafaf8; border-radius: 12px; padding: 0; margin-bottom: 12px; border-right: 4px solid #ddd; overflow: hidden; }
   .card:hover { background: #f5f4f0; }
-  .card .cat { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
-  .card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+  .card-body { padding: 14px 16px; }
+  .card .cat { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 4px; }
+  .card h3 { font-size: 15px; font-weight: 700; line-height: 1.45; margin-bottom: 5px; }
   .card h3 a { color: #3a3a3a; text-decoration: none; }
   .card h3 a:hover { text-decoration: underline; }
-  .card .excerpt { font-size: 13px; color: #777; line-height: 1.6; }
-  .card .meta { margin-top: 6px; font-size: 11px; color: #aaa; display: flex; gap: 6px; align-items: center; }
-  .lang-tag { font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; background: #eee; color: #888; }
+  .card .excerpt { font-size: 13px; color: #777; line-height: 1.65; }
+  .card .meta { margin-top: 8px; font-size: 11px; color: #aaa; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .lang-tag { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #eee; color: #888; }
+
+  /* YouTube embed style */
+  .yt-thumb { position: relative; }
+  .yt-thumb::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: rgba(255,0,0,0.85); border-radius: 12px; }
+  .yt-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; z-index: 2; margin-left: 3px; }
 
   /* Discovery */
   .discovery .icon { background: #f0e6fa; }
-  .discovery-card { background: #faf7fd; border-radius: 12px; padding: 14px 16px; border: 1px dashed #d4c0ea; margin-bottom: 10px; }
-  .discovery-card .bridge { font-size: 12px; font-weight: 600; color: #7c50a8; margin-bottom: 6px; }
+  .discovery-card { background: linear-gradient(135deg, #faf7fd, #f5f0fa); border-radius: 14px; padding: 16px 18px; border: 1px dashed #d4c0ea; margin-bottom: 12px; }
+  .discovery-card .bridge { font-size: 12px; font-weight: 700; color: #7c50a8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
   .discovery-card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
   .discovery-card h3 a { color: #3a3a3a; text-decoration: none; }
   .discovery-card .excerpt { font-size: 13px; color: #777; }
   .discovery-card .meta { margin-top: 6px; font-size: 11px; color: #aaa; }
 
-  /* Trivia */
+  /* Trivia — Today in History */
   .trivia .icon { background: #fef3e2; }
-  .trivia-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; border-right: 3px solid #daa520; }
-  .trivia-card h3 { font-size: 15px; font-weight: 700; color: #b8860b; margin-bottom: 6px; }
-  .trivia-card p { font-size: 14px; color: #555; line-height: 1.7; white-space: pre-line; }
+  .trivia-card { background: linear-gradient(135deg, #fefbf6, #fdf6ea); border-radius: 14px; padding: 16px 18px; border-right: 4px solid #daa520; }
+  .trivia-card h3 { font-size: 14px; font-weight: 700; color: #b8860b; margin-bottom: 8px; }
+  .trivia-card p { font-size: 14px; color: #555; line-height: 1.75; }
 
   /* Puzzle */
-  .puzzle-card { background: #fefbf6; border-radius: 12px; padding: 14px 16px; border-right: 3px solid #b8860b; margin-top: 8px; }
-  .puzzle-card .label { font-size: 12px; font-weight: 700; color: #b8860b; margin-bottom: 4px; }
-  .puzzle-card p { font-size: 14px; color: #555; line-height: 1.7; white-space: pre-line; }
+  .puzzle-card { background: linear-gradient(135deg, #fefbf6, #fdf6ea); border-radius: 14px; padding: 16px 18px; border-right: 4px solid #b8860b; margin-top: 10px; }
+  .puzzle-card .label { font-size: 13px; font-weight: 700; color: #b8860b; margin-bottom: 6px; }
+  .puzzle-card p { font-size: 14px; color: #555; line-height: 1.75; white-space: pre-line; }
+
+  /* Survey */
+  .survey { background: linear-gradient(135deg, #eef6ff, #e4eefa); }
+  .survey .icon { background: #d6e8ff; }
+  .survey-card { background: #fff; border-radius: 14px; padding: 16px 18px; text-align: center; }
+  .survey-card p { font-size: 15px; font-weight: 600; color: #3a3a3a; line-height: 1.6; }
+  .survey-card .hint { font-size: 12px; color: #999; margin-top: 8px; }
 
   /* Footer */
-  .footer { padding: 20px 24px; text-align: center; font-size: 12px; color: #bbb; border-top: 1px solid #f0ede8; }
+  .footer { padding: 24px; text-align: center; font-size: 12px; color: #bbb; border-top: 1px solid #f0ede8; background: #fafaf8; }
+  .footer .hearts { margin-bottom: 4px; font-size: 14px; }
 
   /* LTR for English sections */
   .ltr { direction: ltr; text-align: left; }
+  .ltr .card { border-right: none; border-left: 4px solid #ddd; }
+  .ltr .nimrod .card { border-left-color: #3b7dd8; }
+  .ltr .shaked .card { border-left-color: #6b3fa0; }
 </style>
 </head>
 <body>
@@ -81,7 +102,8 @@
   <div class="header">
     <div class="logo">Famely Neuslettr</div>
     <h1>{{ neo.family_name }}</h1>
-    <div class="date">{{ neo.date }}</div>
+    <div class="date">{{ neo.date_formatted or neo.date }}</div>
+    <div class="edition">{{ edition_number or '1' }} #</div>
     <div class="greeting">{{ neo.greeting }}</div>
   </div>
 
@@ -98,7 +120,7 @@
       <h3>{{ sub.headline }}</h3>
       <p>{{ sub.summary }}</p>
       {% if sub.link_url %}
-      <div class="meta"><a href="{{ sub.link_url }}" style="color: #c8942a;">קישור &larr;</a></div>
+      <div class="meta"><a href="{{ sub.link_url }}" style="color: #c8942a; font-weight: 600;">קישור &larr;</a></div>
       {% endif %}
     </div>
     {% endfor %}
@@ -116,6 +138,7 @@
   <!-- 3-7. Member Sections -->
   {% for section in neo.member_sections %}
   {% set mc = member_config[section.member_id] %}
+  {% if section['items'] %}
   <div class="section {{ mc.class }}{% if section.language == 'en' %} ltr{% endif %}">
     <div class="section-header">
       <div class="icon">{{ mc.icon }}</div>
@@ -123,16 +146,28 @@
     </div>
     {% for item in section['items'] %}
     <div class="card">
-      <div class="cat">{{ item.category }}</div>
-      <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-      <div class="excerpt">{{ item.summary }}</div>
-      <div class="meta">
-        {{ item.source_name }}
-        <span>&middot;</span>
-        {{ item.published_at[:10] if item.published_at else '' }}
-        {% if item.language == 'en' and section.language != 'en' %}
-        <span class="lang-tag">EN</span>
-        {% endif %}
+      {% if item.image_url %}
+      {% if item.source_name and 'YouTube' in (item.source_name or '') or 'youtube' in (item.source_name or '').lower() %}
+      <div class="yt-thumb">
+        <img class="card-img" src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
+        <div class="yt-play"></div>
+      </div>
+      {% else %}
+      <img class="card-img" src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
+      {% endif %}
+      {% endif %}
+      <div class="card-body">
+        <div class="cat">{{ item.category }}</div>
+        <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+        <div class="excerpt">{{ item.summary }}</div>
+        <div class="meta">
+          {{ item.source_name }}
+          <span>&middot;</span>
+          {{ item.published_at[:10] if item.published_at else '' }}
+          {% if item.language == 'en' and section.language != 'en' %}
+          <span class="lang-tag">EN</span>
+          {% endif %}
+        </div>
       </div>
     </div>
     {% endfor %}
@@ -145,6 +180,7 @@
     </div>
     {% endif %}
   </div>
+  {% endif %}
   {% endfor %}
 
   {% if neo.discovery %}
@@ -156,7 +192,7 @@
     </div>
     {% for item in neo.discovery %}
     <div class="discovery-card">
-      <div class="bridge">{{ item.bridge_text }}</div>
+      <div class="bridge">💡 {{ item.bridge_text }}</div>
       <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
       <div class="excerpt">{{ item.summary }}</div>
       <div class="meta">{{ item.source_name }}</div>
@@ -166,19 +202,36 @@
   {% endif %}
 
   <!-- 9. Trivia / Today in History -->
+  {% if neo.trivia.get('history') %}
   <div class="section trivia">
     <div class="section-header">
       <div class="icon">📜</div>
       <h2>היום בהיסטוריה</h2>
     </div>
     <div class="trivia-card">
-      <p>{{ neo.trivia.get('history', neo.greeting) }}</p>
+      <p>{{ neo.trivia['history'] }}</p>
     </div>
   </div>
+  {% endif %}
 
-  <!-- 10. Footer -->
+  <!-- 10. Survey -->
+  {% if neo.survey_question %}
+  <div class="section survey">
+    <div class="section-header">
+      <div class="icon">💬</div>
+      <h2>שאלת היום</h2>
+    </div>
+    <div class="survey-card">
+      <p>{{ neo.survey_question }}</p>
+      <div class="hint">ענו בוואטסאפ!</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 11. Footer -->
   <div class="footer">
-    Famely Neuslettr &middot; powered by AI with ❤️ &middot; גליון #{{ edition_number or '1' }}
+    <div class="hearts">⛵ 🌿 ⚗️ 🎪 🧮</div>
+    Famely Neuslettr &middot; powered by AI with ❤️ &middot; {{ neo.date_formatted or neo.date }}
   </div>
 
 </div>

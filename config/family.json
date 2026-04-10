@@ -1,11 +1,26 @@
 {
   "family_name": "משפחת בן-צבי ולד",
   "family_name_en": "Ben-Tzvi Wald Family",
-  "newsletter_url_base": "https://your-server.com/newsletter",
+  "newsletter_url_base": "https://nimrod.bio/newsletter",
   "shared_interests": {
-    "topics": ["ים ושייט", "סקי", "משחקי חברה", "זמן איכות משפחתי"],
-    "topics_en": ["Sea & sailing", "Skiing", "Board games", "Family quality time"],
-    "values": ["תקשורת עמוקה", "סקרנות", "הרפתקאות", "קיימות"]
+    "topics": [
+      "ים ושייט",
+      "סקי",
+      "משחקי חברה",
+      "זמן איכות משפחתי"
+    ],
+    "topics_en": [
+      "Sea & sailing",
+      "Skiing",
+      "Board games",
+      "Family quality time"
+    ],
+    "values": [
+      "תקשורת עמוקה",
+      "סקרנות",
+      "הרפתקאות",
+      "קיימות"
+    ]
   },
   "members": [
     {
@@ -22,49 +37,138 @@
         {
           "topic": "שייט וסקיפרים",
           "topic_en": "Sailing & Skipper Life",
-          "subtopics": ["שייט", "סקיפר", "מפרשים", "יאכטות", "ים תיכון", "הפלגה", "עגינה", "sailing", "cruising", "skipper"],
+          "subtopics": [
+            "שייט",
+            "סקיפר",
+            "מפרשים",
+            "יאכטות",
+            "ים תיכון",
+            "הפלגה",
+            "עגינה",
+            "sailing",
+            "cruising",
+            "skipper"
+          ],
           "priority": "high"
         },
         {
           "topic": "גלישת קייט",
           "topic_en": "Kite Surfing",
-          "subtopics": ["קייט", "קייטסרפינג", "foil", "כנפית", "רוח", "kiteboarding", "kitesurf", "hydrofoil"],
+          "subtopics": [
+            "קייט",
+            "קייטסרפינג",
+            "foil",
+            "כנפית",
+            "רוח",
+            "kiteboarding",
+            "kitesurf",
+            "hydrofoil"
+          ],
           "priority": "high"
         },
         {
           "topic": "קיימות וגידול מזון",
           "topic_en": "Sustainability & Food Growing",
-          "subtopics": ["פרמקלצ'ר", "גידול ירקות", "חקלאות עירונית", "קיימות", "permaculture", "urban farming", "sustainable living"],
+          "subtopics": [
+            "פרמקלצ'ר",
+            "גידול ירקות",
+            "חקלאות עירונית",
+            "קיימות",
+            "permaculture",
+            "urban farming",
+            "sustainable living"
+          ],
           "priority": "high"
         },
         {
           "topic": "סקי",
           "topic_en": "Skiing",
-          "subtopics": ["סקי", "אלפים", "שלג", "skiing", "alpine", "off-piste"],
+          "subtopics": [
+            "סקי",
+            "אלפים",
+            "שלג",
+            "skiing",
+            "alpine",
+            "off-piste"
+          ],
           "priority": "medium"
         },
         {
           "topic": "AI למפתחים",
           "topic_en": "AI for Developers",
-          "subtopics": ["Claude", "LLM", "agents", "MCP", "AI tools"],
+          "subtopics": [
+            "Claude",
+            "LLM",
+            "agents",
+            "MCP",
+            "AI tools"
+          ],
           "priority": "low"
         }
       ],
       "media_sources": [
-        {"type": "rss", "url": "https://www.yachtingworld.com/feed", "name": "Yachting World"},
-        {"type": "website", "url": "https://www.sailingtotem.com", "name": "Sailing Totem (Cruising Families)"},
-        {"type": "rss", "url": "https://www.iksurfmag.com/feed/", "name": "IKSURFMAG"},
-        {"type": "website", "url": "https://kitesurfingmag.com", "name": "Kitesurfing Magazine"},
-        {"type": "website", "url": "https://kitesurfer.co.il", "name": "Kitesurfer Israel"},
-        {"type": "rss", "url": "https://www.permaculture.co.uk/feed", "name": "Permaculture Magazine"},
-        {"type": "website", "url": "https://www.surfertoday.com/kiteboarding", "name": "SurferToday Kite"},
-        {"type": "rss", "url": "https://www.anthropic.com/feed.xml", "name": "Anthropic Blog"}
+        {
+          "type": "rss",
+          "url": "https://www.yachtingworld.com/feed",
+          "name": "Yachting World"
+        },
+        {
+          "type": "website",
+          "url": "https://www.sailingtotem.com",
+          "name": "Sailing Totem (Cruising Families)"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.iksurfmag.com/feed/",
+          "name": "IKSURFMAG"
+        },
+        {
+          "type": "website",
+          "url": "https://kitesurfingmag.com",
+          "name": "Kitesurfing Magazine"
+        },
+        {
+          "type": "website",
+          "url": "https://kitesurfer.co.il",
+          "name": "Kitesurfer Israel"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.permaculture.co.uk/feed",
+          "name": "Permaculture Magazine"
+        },
+        {
+          "type": "website",
+          "url": "https://www.surfertoday.com/kiteboarding",
+          "name": "SurferToday Kite"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.anthropic.com/feed.xml",
+          "name": "Anthropic Blog"
+        }
       ],
       "social_profiles": [
-        {"platform": "facebook", "url": "https://www.facebook.com/Wald.Nimrod/", "note": "לא פעיל אבל רואים תחומי עניין"},
-        {"platform": "facebook", "url": "https://www.facebook.com/NimrodGarden/", "note": "גינון וגידול מזון"},
-        {"platform": "instagram", "url": "https://www.instagram.com/nimrod_wald", "note": ""},
-        {"platform": "youtube", "url": "https://www.youtube.com/channel/UCOP0fVsvULvopGFNxRFlgaw", "note": ""}
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/Wald.Nimrod/",
+          "note": "לא פעיל אבל רואים תחומי עניין"
+        },
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/NimrodGarden/",
+          "note": "גינון וגידול מזון"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/nimrod_wald",
+          "note": ""
+        },
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/channel/UCOP0fVsvULvopGFNxRFlgaw",
+          "note": ""
+        }
       ],
       "content_preferences": {
         "max_items_per_day": 5,
@@ -86,42 +190,104 @@
         {
           "topic": "ארכיטקטורה ירוקה",
           "topic_en": "Green Architecture",
-          "subtopics": ["אדריכלות ירוקה", "בנייה ירוקה", "בנייה טבעית", "sustainable architecture", "eco design", "passive house", "green building"],
+          "subtopics": [
+            "אדריכלות ירוקה",
+            "בנייה ירוקה",
+            "בנייה טבעית",
+            "sustainable architecture",
+            "eco design",
+            "passive house",
+            "green building"
+          ],
           "priority": "high"
         },
         {
           "topic": "קפוארה",
           "topic_en": "Capoeira",
-          "subtopics": ["קפוארה", "capoeira angola", "capoeira regional", "roda", "berimbau", "תנועה"],
+          "subtopics": [
+            "קפוארה",
+            "capoeira angola",
+            "capoeira regional",
+            "roda",
+            "berimbau",
+            "תנועה"
+          ],
           "priority": "high"
         },
         {
           "topic": "מיינדפולנס וגוף-נפש",
           "topic_en": "Mindfulness & Body-Mind",
-          "subtopics": ["מיינדפולנס", "מדיטציה", "נשימה", "mindfulness", "meditation", "breathwork", "wellness"],
+          "subtopics": [
+            "מיינדפולנס",
+            "מדיטציה",
+            "נשימה",
+            "mindfulness",
+            "meditation",
+            "breathwork",
+            "wellness"
+          ],
           "priority": "high"
         },
         {
           "topic": "טבע וקיימות",
           "topic_en": "Nature & Sustainability",
-          "subtopics": ["קיימות", "אקולוגיה", "טבע", "פרמקלצ'ר", "גינון"],
+          "subtopics": [
+            "קיימות",
+            "אקולוגיה",
+            "טבע",
+            "פרמקלצ'ר",
+            "גינון"
+          ],
           "priority": "medium"
         },
         {
           "topic": "חינוך אלטרנטיבי",
           "topic_en": "Alternative Education",
-          "subtopics": ["אנתרופוסופיה", "וולדורף", "חינוך חופשי", "waldorf"],
+          "subtopics": [
+            "אנתרופוסופיה",
+            "וולדורף",
+            "חינוך חופשי",
+            "waldorf"
+          ],
           "priority": "low"
         }
       ],
       "media_sources": [
-        {"type": "rss", "url": "https://www.archdaily.com/feed", "name": "ArchDaily"},
-        {"type": "rss", "url": "https://www.dezeen.com/feed/", "name": "Dezeen"},
-        {"type": "website", "url": "https://www.mindful.org", "name": "Mindful.org"},
-        {"type": "website", "url": "https://opencapoeira.com", "name": "Open Capoeira"},
-        {"type": "website", "url": "https://thecapoeirablog.wordpress.com", "name": "The Capoeira Blog"},
-        {"type": "facebook", "url": "https://www.facebook.com/HobbitHome.co.il/", "name": "HobbitHome Facebook"},
-        {"type": "website", "url": "https://abadacapoeiraisrael.org.il", "name": "ABADÁ Capoeira Israel"}
+        {
+          "type": "rss",
+          "url": "https://www.archdaily.com/feed",
+          "name": "ArchDaily"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.dezeen.com/feed/",
+          "name": "Dezeen"
+        },
+        {
+          "type": "website",
+          "url": "https://www.mindful.org",
+          "name": "Mindful.org"
+        },
+        {
+          "type": "website",
+          "url": "https://opencapoeira.com",
+          "name": "Open Capoeira"
+        },
+        {
+          "type": "website",
+          "url": "https://thecapoeirablog.wordpress.com",
+          "name": "The Capoeira Blog"
+        },
+        {
+          "type": "facebook",
+          "url": "https://www.facebook.com/HobbitHome.co.il/",
+          "name": "HobbitHome Facebook"
+        },
+        {
+          "type": "website",
+          "url": "https://abadacapoeiraisrael.org.il",
+          "name": "ABADÁ Capoeira Israel"
+        }
       ],
       "content_preferences": {
         "max_items_per_day": 4,
@@ -129,8 +295,16 @@
         "preferred_length": "short"
       },
       "social_profiles": [
-        {"platform": "facebook", "url": "https://www.facebook.com/HobbitHome.co.il/", "note": "דף עסקי - אדריכלות ירוקה"},
-        {"platform": "instagram", "url": "https://www.instagram.com/hobbithomearc", "note": ""}
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/HobbitHome.co.il/",
+          "note": "דף עסקי - אדריכלות ירוקה"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/hobbithomearc",
+          "note": ""
+        }
       ],
       "_discovery_note": "Need to discover actual Instagram follows, podcast subscriptions from Michal directly"
     },
@@ -150,28 +324,69 @@
         {
           "topic": "Sci-Fi & Web Fiction",
           "topic_en": "Sci-Fi & Web Fiction",
-          "subtopics": ["hard sci-fi", "progression fantasy", "LitRPG", "web novels", "Royal Road", "speculative fiction", "Dungeon Crawler Carl", "fantasy"],
+          "subtopics": [
+            "hard sci-fi",
+            "progression fantasy",
+            "LitRPG",
+            "web novels",
+            "Royal Road",
+            "speculative fiction",
+            "Dungeon Crawler Carl",
+            "fantasy"
+          ],
           "priority": "high"
         },
         {
           "topic": "Chemistry & Science",
           "topic_en": "Chemistry & Science",
-          "subtopics": ["chemistry", "organic chemistry", "molecular biology", "physics", "quantum", "research papers", "ETH Zurich"],
+          "subtopics": [
+            "chemistry",
+            "organic chemistry",
+            "molecular biology",
+            "physics",
+            "quantum",
+            "research papers",
+            "ETH Zurich"
+          ],
           "priority": "high"
         },
         {
           "topic": "Gaming",
           "topic_en": "Gaming",
-          "subtopics": ["indie games", "strategy", "PC gaming"],
+          "subtopics": [
+            "indie games",
+            "strategy",
+            "PC gaming"
+          ],
           "priority": "low"
         }
       ],
       "media_sources": [
-        {"type": "website", "url": "https://www.royalroad.com/fictions/latest-updates/", "name": "Royal Road"},
-        {"type": "rss", "url": "https://www.nature.com/nchem.rss", "name": "Nature Chemistry"},
-        {"type": "website", "url": "https://www.reddit.com/r/ProgressionFantasy/", "name": "r/ProgressionFantasy"},
-        {"type": "website", "url": "https://www.reddit.com/r/chemistry/", "name": "r/chemistry"},
-        {"type": "website", "url": "https://www.reddit.com/r/rational/", "name": "r/rational (rational fiction)"}
+        {
+          "type": "website",
+          "url": "https://www.royalroad.com/fictions/latest-updates/",
+          "name": "Royal Road"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.nature.com/nchem.rss",
+          "name": "Nature Chemistry"
+        },
+        {
+          "type": "website",
+          "url": "https://www.reddit.com/r/ProgressionFantasy/",
+          "name": "r/ProgressionFantasy"
+        },
+        {
+          "type": "website",
+          "url": "https://www.reddit.com/r/chemistry/",
+          "name": "r/chemistry"
+        },
+        {
+          "type": "website",
+          "url": "https://www.reddit.com/r/rational/",
+          "name": "r/rational (rational fiction)"
+        }
       ],
       "content_preferences": {
         "max_items_per_day": 3,
@@ -179,7 +394,11 @@
         "preferred_length": "medium"
       },
       "social_profiles": [
-        {"platform": "facebook", "url": "https://www.facebook.com/profile.php?id=100026738281778", "note": "ממש לא פעיל, ישן"}
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/profile.php?id=100026738281778",
+          "note": "ממש לא פעיל, ישן"
+        }
       ],
       "communication_channel": "discord",
       "_note": "Most private family member. ALL content in English. Respect his independence and intelligence. Don't dumb things down."
@@ -200,27 +419,95 @@
         {
           "topic": "קרקס ואומנויות אוויר",
           "topic_en": "Circus & Aerial Arts",
-          "subtopics": ["קרקס", "אקרובטיקה", "טרפז", "aerial silks", "aerial hoop", "cirque", "circus school", "CNAC", "ESAC", "performance"],
+          "subtopics": [
+            "קרקס",
+            "אקרובטיקה",
+            "טרפז",
+            "aerial silks",
+            "aerial hoop",
+            "cirque",
+            "circus school",
+            "CNAC",
+            "ESAC",
+            "performance",
+            "contemporary circus",
+            "acrobat",
+            "aerial arts",
+            "contortion",
+            "juggling",
+            "trapeze",
+            "choreography",
+            "circus festival",
+            "new circus",
+            "physical theatre"
+          ],
           "priority": "high"
         },
         {
           "topic": "רשתות חברתיות וטרנדים",
           "topic_en": "Social Media & Trends",
-          "subtopics": ["אינסטגרם", "TikTok", "טרנדים", "אופנה", "מוזיקה"],
+          "subtopics": [
+            "אינסטגרם",
+            "TikTok",
+            "טרנדים",
+            "אופנה",
+            "מוזיקה"
+          ],
           "priority": "medium"
         },
         {
           "topic": "ריקוד ותנועה",
           "topic_en": "Dance & Movement",
-          "subtopics": ["ריקוד", "contemporary dance", "movement", "physical theatre"],
+          "subtopics": [
+            "ריקוד",
+            "contemporary dance",
+            "movement",
+            "physical theatre",
+            "choreography",
+            "dance performance",
+            "ballet",
+            "hip hop",
+            "dance class"
+          ],
           "priority": "medium"
         }
       ],
       "media_sources": [
-        {"type": "website", "url": "https://circustalk.com", "name": "CircusTalk"},
-        {"type": "instagram", "url": "https://www.instagram.com", "name": "Instagram (circus accounts)"},
-        {"type": "website", "url": "https://www.cnac.fr", "name": "CNAC France"},
-        {"type": "website", "url": "https://www.esac.be", "name": "ESAC Belgium"}
+        {
+          "type": "website",
+          "url": "https://circustalk.com",
+          "name": "CircusTalk"
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/@CirsduSoleil",
+          "name": "Cirque du Soleil"
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/@dancemagazine",
+          "name": "Dance Magazine"
+        },
+        {
+          "type": "website",
+          "url": "https://www.cnac.fr",
+          "name": "CNAC France"
+        },
+        {
+          "type": "website",
+          "url": "https://www.esac.be",
+          "name": "ESAC Belgium"
+        },
+        {
+          "type": "rss",
+          "url": "https://www.dancemagazine.com/feed/",
+          "name": "Dance Magazine RSS"
+        },
+        {
+          "type": "website",
+          "url": "https://aerialexpo.com/blog/",
+          "name": "Aerial Expo Blog"
+        }
       ],
       "content_preferences": {
         "max_items_per_day": 3,
@@ -228,8 +515,16 @@
         "preferred_length": "short"
       },
       "social_profiles": [
-        {"platform": "instagram", "url": "https://www.instagram.com/yuyu_m2569", "note": "פרופיל אישי"},
-        {"platform": "facebook", "url": "https://www.facebook.com/p/Shabazi-Circus-%D7%A7%D7%A8%D7%A7%D7%A1-%D7%A9%D7%91%D7%96%D7%99-100063625597493/", "note": "קרקס שבזי - הקרקס שלה"}
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/yuyu_m2569",
+          "note": "פרופיל אישי"
+        },
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/p/Shabazi-Circus-%D7%A7%D7%A8%D7%A7%D7%A1-%D7%A9%D7%91%D7%96%D7%99-100063625597493/",
+          "note": "קרקס שבזי - הקרקס שלה"
+        }
       ],
       "_note": "Very social and visual. Content should be engaging, visual, and shareable. Include audition dates and circus school info. ALWAYS call her יויו."
     },
@@ -249,28 +544,77 @@
         {
           "topic": "מתמטיקה וחידות",
           "topic_en": "Math & Puzzles",
-          "subtopics": ["חידות מתמטיקה", "לוגיקה", "math", "mathematical", "math puzzles", "riddles", "brain teasers", "Numberphile", "geometry", "tessellation", "algebra"],
+          "subtopics": [
+            "חידות מתמטיקה",
+            "לוגיקה",
+            "math",
+            "mathematical",
+            "math puzzles",
+            "riddles",
+            "brain teasers",
+            "Numberphile",
+            "geometry",
+            "tessellation",
+            "algebra"
+          ],
           "priority": "high"
         },
         {
           "topic": "היסטוריה וכלכלה",
           "topic_en": "History & Economics",
-          "subtopics": ["היסטוריה", "כלכלה", "history", "economics", "economics explained", "גיאופוליטיקה", "history mysteries", "money", "trade"],
+          "subtopics": [
+            "היסטוריה",
+            "כלכלה",
+            "history",
+            "economics",
+            "economics explained",
+            "גיאופוליטיקה",
+            "history mysteries",
+            "money",
+            "trade"
+          ],
           "priority": "high"
         },
         {
           "topic": "ידע כללי ומדע",
           "topic_en": "General Knowledge & Science",
-          "subtopics": ["טריוויה", "ידע כללי", "מדע", "Veritasium", "TED-Ed", "עובדות מפתיעות"],
+          "subtopics": [
+            "טריוויה",
+            "ידע כללי",
+            "מדע",
+            "Veritasium",
+            "TED-Ed",
+            "עובדות מפתיעות"
+          ],
           "priority": "medium"
         }
       ],
       "media_sources": [
-        {"type": "youtube", "url": "https://www.youtube.com/@numberphile", "name": "Numberphile"},
-        {"type": "youtube", "url": "https://www.youtube.com/@veritasium", "name": "Veritasium"},
-        {"type": "youtube", "url": "https://www.youtube.com/@TEDEd", "name": "TED-Ed"},
-        {"type": "website", "url": "https://mathpickle.com", "name": "MathPickle"},
-        {"type": "website", "url": "https://mindyourdecisions.com/blog/", "name": "Mind Your Decisions"}
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/@numberphile",
+          "name": "Numberphile"
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/@veritasium",
+          "name": "Veritasium"
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/@TEDEd",
+          "name": "TED-Ed"
+        },
+        {
+          "type": "website",
+          "url": "https://mathpickle.com",
+          "name": "MathPickle"
+        },
+        {
+          "type": "website",
+          "url": "https://mindyourdecisions.com/blog/",
+          "name": "Mind Your Decisions"
+        }
       ],
       "content_preferences": {
         "max_items_per_day": 3,

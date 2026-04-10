@@ -147,6 +147,7 @@ class GeneratedContent:
     summaries: dict  # {nci_id: summary}
     submission_edits: dict  # {submission_id: {headline, summary}}
     bridges: list[dict]  # [{from_member, to_member, nci_id, text}]
+    history: str = ""  # "Today in history" fact
 
 
 @dataclass
@@ -160,7 +161,8 @@ class NEO:
     discovery: list[dict]         # cross-member items with bridge text
     trivia: dict                  # {puzzle, answer, history}
     survey_question: str
-    metadata: dict
+    date_formatted: str = ""  # Hebrew date like "יום חמישי, 10 באפריל 2026"
+    metadata: dict = field(default_factory=dict)
 
     def to_json(self) -> str:
         """Serialize to JSON string."""
