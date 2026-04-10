@@ -21,6 +21,12 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 os.chdir(str(project_root))
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(project_root / ".env")
+except ImportError:
+    pass
+
 from src.m1_profiles import load_profiles, load_sources, load_settings, get_scan_rules
 from src.m2_scanner import scan_all, generate_mock_ncis
 from src.m3_normalizer import build_edition

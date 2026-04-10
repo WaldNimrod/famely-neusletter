@@ -6,7 +6,6 @@ FTP upload + WhatsApp/Email send per LOD400 §7.
 import ftplib
 import logging
 import os
-import smtplib
 import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -17,6 +16,13 @@ from typing import Optional
 import requests
 
 from .models import NEO, FamilyConfig, Settings, MemberProfile, FTPUploadError
+from .env_compat import (
+    ftp_credentials,
+    ftp_remote_base,
+    newsletter_url_base,
+    smtp_config,
+    smtp_deliver_message,
+)
 
 logger = logging.getLogger('famely.m5')
 
@@ -110,12 +116,19 @@ def distribute(html_path: str, neo: NEO, family: FamilyConfig,
     )
 
 
+def _ftp_connect(host: str, port: int) -> ftplib.FTP:
+    if port == 21:
+        return ftplib.FTP(host, timeout=30)
+    ftp = ftplib.FTP()
+    ftp.connect(host, port, timeout=30)
+    return ftp
+
+
 def ftp_upload(html_path: str, date: str, settings: Settings) -> str:
     """Upload HTML to FTP server. Returns public URL."""
-    host = os.environ.get('FTP_HOST', '')
-    user = os.environ.get('FTP_USER', '')
-    passwd = os.environ.get('FTP_PASS', '')
-    remote_base = settings.ftp.get('remote_path', '/newsletter')
+    host, user, passwd, port = ftp_credentials()
+    remote_base = ftp_remote_base(settings)
+    url_base = newsletter_url_base(settings)
     retry_count = settings.ftp.get('retry_count', 3)
     retry_delay = settings.ftp.get('retry_delay_seconds', 10)
 
@@ -124,7 +137,7 @@ def ftp_upload(html_path: str, date: str, settings: Settings) -> str:
 
     for attempt in range(retry_count):
         try:
-            ftp = ftplib.FTP(host, timeout=30)
+            ftp = _ftp_connect(host, port)
             ftp.login(user, passwd)
 
             # Create directory
@@ -139,7 +152,6 @@ def ftp_upload(html_path: str, date: str, settings: Settings) -> str:
 
             ftp.quit()
 
-            url_base = settings.newsletter.get('url_base', 'https://nimrod.bio/newsletter')
             public_url = f"{url_base}/{date}/index.html"
             logger.info(f"[M5] FTP upload success: {public_url}")
             return public_url
@@ -191,10 +203,9 @@ def send_email(member: MemberProfile, neo: NEO, public_url: str,
                settings: Settings) -> bool:
     """Send email via SMTP."""
     try:
-        smtp_host = os.environ.get('SMTP_HOST', '')
-        smtp_user = os.environ.get('SMTP_USER', '')
-        smtp_pass = os.environ.get('SMTP_PASS', '')
-        smtp_from = os.environ.get('SMTP_FROM', 'famely@nimrod.bio')
+        cfg = smtp_config()
+        if not cfg["host"] or not cfg["password"]:
+            return False
 
         if not member.email:
             return False
@@ -204,7 +215,7 @@ def send_email(member: MemberProfile, neo: NEO, public_url: str,
 
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
-        msg['From'] = f"Famely Neuslettr <{smtp_from}>"
+        msg['From'] = f"Famely Neuslettr <{cfg['from_addr']}>"
         msg['To'] = member.email
 
         # Plain text
@@ -216,9 +227,7 @@ def send_email(member: MemberProfile, neo: NEO, public_url: str,
         </body></html>"""
         msg.attach(MIMEText(html_body, 'html', 'utf-8'))
 
-        with smtplib.SMTP_SSL(smtp_host, 465, timeout=30) as server:
-            server.login(smtp_user, smtp_pass)
-            server.send_message(msg)
+        smtp_deliver_message(msg)
 
         logger.info(f"[M5] Email sent to {member.nickname_newsletter}")
         return True
@@ -319,19 +328,16 @@ def _send_whatsapp_raw(phone: str, message: str, settings: Settings) -> bool:
 def _send_email_raw(email: str, subject: str, body: str) -> bool:
     """Low-level email send."""
     try:
-        smtp_host = os.environ.get('SMTP_HOST', '')
-        smtp_user = os.environ.get('SMTP_USER', '')
-        smtp_pass = os.environ.get('SMTP_PASS', '')
-        smtp_from = os.environ.get('SMTP_FROM', 'famely@nimrod.bio')
+        cfg = smtp_config()
+        if not cfg["host"] or not cfg["password"]:
+            return False
 
         msg = MIMEText(body, 'plain', 'utf-8')
         msg['Subject'] = subject
-        msg['From'] = f"Famely Neuslettr <{smtp_from}>"
+        msg['From'] = f"Famely Neuslettr <{cfg['from_addr']}>"
         msg['To'] = email
 
-        with smtplib.SMTP_SSL(smtp_host, 465, timeout=30) as server:
-            server.login(smtp_user, smtp_pass)
-            server.send_message(msg)
+        smtp_deliver_message(msg)
         return True
     except Exception:
         return False
