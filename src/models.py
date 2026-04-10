@@ -1,5 +1,5 @@
 """
-Famely Neuslettr — Data Models
+Family Newsletter — Data Models
 All dataclasses per LOD400 §3-§8.
 """
 
@@ -148,6 +148,9 @@ class GeneratedContent:
     submission_edits: dict  # {submission_id: {headline, summary}}
     bridges: list[dict]  # [{from_member, to_member, nci_id, text}]
     history: str = ""  # "Today in history" fact
+    opener_text: str = ""  # warm intro paragraph (Style A)
+    closer_text: str = ""  # warm closing paragraph (Style A)
+    weather: list = field(default_factory=list)  # [{city, icon, temp, daily, ...}]
 
 
 @dataclass

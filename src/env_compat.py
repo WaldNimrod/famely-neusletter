@@ -53,7 +53,7 @@ def newsletter_url_base(settings: Any) -> str:
     return str(settings.newsletter.get("url_base", "https://nimrod.bio/newsletter")).rstrip("/")
 
 
-def smtp_config(default_from: str = "famely@nimrod.bio") -> dict[str, Any]:
+def smtp_config(default_from: str = "newsletter@nimrod.bio") -> dict[str, Any]:
     """
     Keys: host, port, user, password, from_addr.
     EMAIL_FROM / SMTP_FROM used as login fallback when user not set.

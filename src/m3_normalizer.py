@@ -1,5 +1,5 @@
 """
-Famely Neuslettr — M3 Normalizer
+Family Newsletter — M3 Normalizer
 7-step pipeline: dedup → score → load_submissions → curate → generate → build_neo → archive
 Per LOD400 §5.
 """
@@ -297,6 +297,15 @@ def generate_content(curated: dict[str, list[ScoredNCI]],
     # 7. Today in history
     history = _generate_history(tt, today, model, settings)
 
+    # 8. Opener (warm intro — Style A: Simaniia)
+    opener_text = _generate_opener(tt, curated, family, today, model, settings)
+
+    # 9. Closer (warm sign-off — Style A: Simaniia)
+    closer_text = _generate_closer(tt, family, today, model, settings)
+
+    # 10. Weather forecast (real API)
+    weather = _fetch_weather(settings)
+
     return GeneratedContent(
         greeting=greeting,
         greeting_en=greeting_en,
@@ -309,6 +318,9 @@ def generate_content(curated: dict[str, list[ScoredNCI]],
         submission_edits=submission_edits,
         bridges=bridges,
         history=history,
+        opener_text=opener_text,
+        closer_text=closer_text,
+        weather=weather,
     )
 
 
@@ -534,6 +546,147 @@ def _generate_history(tt, today, model, settings):
         return f"ב-{today} קרו הרבה דברים מעניינים לאורך ההיסטוריה!"
 
 
+def _generate_opener(tt, curated, family, today, model, settings):
+    """Generate warm opener paragraph (Style A: Simaniia)."""
+    topic_list = _collect_topics(curated)
+    topics_str = ', '.join(topic_list) if topic_list else 'תוכן מגוון'
+    try:
+        return tt.generate("m3", "opener",
+            f"כתוב פסקת פתיח חמה לניוזלטר משפחתי שבועי.\n"
+            f"תאריך: {today}\n"
+            f"שם המשפחה: בית ולד\n"
+            f"נושאים מרכזיים השבוע: {topics_str}\n"
+            f"סגנון: חם, אישי, משפחתי — כמו סימניה (הבלוג של אבישי). "
+            f"פנייה ישירה, משפטים קצרים, רגש אמיתי.\n"
+            f"אורך: 3-4 משפטים. השתמש בתגיות HTML בסיסיות (<strong>, <em>) להדגשה.\n"
+            f"אל תשתמש ב-markdown.",
+            max_tokens=settings.ai.get('greeting_max_tokens', 150),
+            model=model, newsletter_date=today)
+    except Exception:
+        return "<strong>שבוע טוב, בית ולד!</strong> המהדורה השבועית שלכם מוכנה — עם תוכן טרי שנאסף במיוחד עבור כל אחד ואחת מכם."
+
+
+def _generate_closer(tt, family, today, model, settings):
+    """Generate warm closing paragraph (Style A: Simaniia)."""
+    try:
+        return tt.generate("m3", "closer",
+            f"כתוב פסקת סיום חמה לניוזלטר משפחתי שבועי.\n"
+            f"תאריך: {today}\n"
+            f"שם המשפחה: בית ולד\n"
+            f"סגנון: חם, אישי — כמו סימניה. "
+            f"פנייה ישירה, מעודד, מזמין לשתף תגובות.\n"
+            f"אורך: 2-3 משפטים. השתמש בתגיות HTML בסיסיות (<strong>, <em>).\n"
+            f"אל תשתמש ב-markdown.",
+            max_tokens=settings.ai.get('greeting_max_tokens', 150),
+            model=model, newsletter_date=today)
+    except Exception:
+        return "נתראה בשבוע הבא! אם קראתם משהו מעניין, שלחו לנו — <strong>התוכן שלכם הוא הלב של הניוזלטר</strong>."
+
+
+def _fetch_weather(settings) -> list:
+    """
+    Fetch 7-day weather forecast for family locations.
+    Uses Open-Meteo (free, no API key required).
+    Locations: Pardes Hanna (home) + Basel (Shaked).
+    """
+    import requests as _req
+
+    LOCATIONS = [
+        {'city': 'פרדס חנה', 'city_en': 'Pardes Hanna', 'lat': 32.47, 'lon': 34.97, 'icon': '🏠'},
+        {'city': 'באזל', 'city_en': 'Basel', 'lat': 47.56, 'lon': 7.59, 'icon': '🇨🇭'},
+    ]
+
+    HEB_DAYS = ['ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳', 'א׳']
+
+    weather_data = []
+    for loc in LOCATIONS:
+        try:
+            resp = _req.get(
+                "https://api.open-meteo.com/v1/forecast",
+                params={
+                    'latitude': loc['lat'],
+                    'longitude': loc['lon'],
+                    'daily': 'temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max',
+                    'timezone': 'auto',
+                    'forecast_days': 7,
+                },
+                timeout=15,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            daily_data = data.get('daily', {})
+            dates = daily_data.get('time', [])
+            highs = daily_data.get('temperature_2m_max', [])
+            lows = daily_data.get('temperature_2m_min', [])
+            precip = daily_data.get('precipitation_sum', [])
+            wind = daily_data.get('wind_speed_10m_max', [])
+
+            daily_list = []
+            for i in range(min(7, len(dates))):
+                dt = datetime.strptime(dates[i], '%Y-%m-%d')
+                day_name = HEB_DAYS[dt.weekday()]
+                daily_list.append({
+                    'date': dates[i],
+                    'day': day_name,
+                    'high': round(highs[i]) if i < len(highs) else 25,
+                    'low': round(lows[i]) if i < len(lows) else 15,
+                    'precipitation': round(precip[i], 1) if i < len(precip) else 0,
+                    'wind_speed': round(wind[i]) if i < len(wind) else 10,
+                })
+
+            # Determine weather icon from today's conditions
+            today_high = round(highs[0]) if highs else 25
+            today_precip = precip[0] if precip else 0
+            today_wind = wind[0] if wind else 0
+
+            if today_precip > 5:
+                w_icon = '🌧️'
+            elif today_precip > 0:
+                w_icon = '⛅'
+            elif today_high > 30:
+                w_icon = '☀️'
+            elif today_high > 20:
+                w_icon = '🌤️'
+            else:
+                w_icon = '❄️' if today_high < 10 else '🌥️'
+
+            # Wind alert for kite-friendly conditions (Nimrod!)
+            wind_alert = today_wind >= 20
+
+            # Week summary
+            avg_high = round(sum(highs[:7]) / min(7, len(highs)))
+            max_wind = round(max(wind[:7])) if wind else 0
+            total_precip = round(sum(precip[:7]), 1)
+
+            summary_parts = [f"ממוצע {avg_high}°"]
+            if total_precip > 0:
+                summary_parts.append(f"משקעים {total_precip}mm")
+            if max_wind >= 20:
+                summary_parts.append(f"רוח עד {max_wind} קמ\"ש ⛵")
+
+            weather_data.append({
+                'city': loc['city'],
+                'city_en': loc['city_en'],
+                'icon': w_icon,
+                'temp': f"{today_high}°",
+                'is_temp': False,  # already has ° symbol
+                'wind_alert': wind_alert,
+                'daily': daily_list,
+                'description': f"{loc['icon']} {loc['city']}",
+                'week_summary': ' | '.join(summary_parts),
+            })
+
+            logger.info(f"[M3] Weather fetched: {loc['city_en']} — {today_high}°, wind {today_wind}km/h")
+
+        except Exception as e:
+            logger.warning(f"[M3] Weather fetch failed for {loc['city_en']}: {e}")
+            # Graceful fallback — skip this location
+            continue
+
+    return weather_data
+
+
 def _format_hebrew_date(today: str) -> str:
     """Convert YYYY-MM-DD to Hebrew formatted date string."""
     HEB_DAYS = ['שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת', 'ראשון']
@@ -673,6 +826,9 @@ def _build_neo(curated, generated, submissions, family, settings,
             'submissions_count': len(submissions),
             'discovery_count': len(discovery_items),
             'build_duration_ms': elapsed_ms,
+            'opener_text': generated.opener_text,
+            'closer_text': generated.closer_text,
+            'weather': generated.weather,
         }
     )
 

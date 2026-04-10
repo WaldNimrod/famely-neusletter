@@ -224,7 +224,7 @@ def send_email(member: MemberProfile, neo: NEO, public_url: str,
 
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
-        msg['From'] = f"Famely Neuslettr <{cfg['from_addr']}>"
+        msg['From'] = f"Family Newsletter <{cfg['from_addr']}>"
         msg['To'] = member.email
 
         # Plain text
@@ -259,11 +259,11 @@ def send_survey(family: FamilyConfig, neo: NEO, settings: Settings,
 
         # Build survey message
         if member.language_preference == 'en':
-            msg = (f"📊 Famely Neuslettr — Daily Check-in\n\n"
+            msg = (f"📊 Family Newsletter — Daily Check-in\n\n"
                    f"{neo.survey_question}\n\n"
                    f"(Reply freely 🙂)")
         else:
-            msg = (f"📊 Famely Neuslettr — סקר יומי\n\n"
+            msg = (f"📊 Family Newsletter — סקר יומי\n\n"
                    f"{neo.survey_question}\n\n"
                    f"(שלחו תשובה בחופשיות 🙂)")
 
@@ -276,7 +276,7 @@ def send_survey(family: FamilyConfig, neo: NEO, settings: Settings,
             channel = 'whatsapp' if success else 'none'
 
         if not success and member.email:
-            success = _send_email_raw(member.email, "📊 Famely Neuslettr Survey", msg)
+            success = _send_email_raw(member.email, "📊 Family Newsletter Survey", msg)
             channel = 'email' if success else 'none'
 
         results.append({
@@ -343,7 +343,7 @@ def _send_email_raw(email: str, subject: str, body: str) -> bool:
 
         msg = MIMEText(body, 'plain', 'utf-8')
         msg['Subject'] = subject
-        msg['From'] = f"Famely Neuslettr <{cfg['from_addr']}>"
+        msg['From'] = f"Family Newsletter <{cfg['from_addr']}>"
         msg['To'] = email
 
         smtp_deliver_message(msg)

@@ -1,5 +1,5 @@
 """
-Famely Neuslettr — M2 Scanner
+Family Newsletter — M2 Scanner
 Fetches content from sources → NCI[] per LOD400 §4.
 Uses stdlib xml.etree (no feedparser), requests, BeautifulSoup.
 """
@@ -20,7 +20,7 @@ from .models import NCI, SourceConfig, ScanRule, Settings, create_nci
 logger = logging.getLogger('famely.m2')
 
 TIMEOUT = 30  # seconds per source
-USER_AGENT = "FamelyNeuslettr/1.0 (+https://nimrod.bio/newsletter)"
+USER_AGENT = "FamilyNewsletter/2.0 (+https://nimrod.bio/newsletter)"
 
 # YouTube channel ID regex from @handle pages
 YT_CHANNEL_RE = re.compile(r'"externalId"\s*:\s*"(UC[\w-]+)"')
