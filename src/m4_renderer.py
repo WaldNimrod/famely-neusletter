@@ -16,6 +16,8 @@ from .db import Database
 
 logger = logging.getLogger('famely.m4')
 
+SYSTEM_VERSION = "3.0.0"
+
 # Character schedule for monthly rotation
 CHARACTER_SCHEDULE = {
     '2026-04': {'name': 'Cat in the Hat', 'emoji': '🎩', 'style': 'Dr. Seuss'},
@@ -118,6 +120,8 @@ def render(neo: NEO, template_path: str = "templates/",
     # Convert NEO to template-friendly dict
     neo_dict = asdict(neo) if hasattr(neo, '__dataclass_fields__') else neo.__dict__
 
+    build_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
     html = template.render(
         neo=neo,
         edition_number=edition_number,
@@ -126,6 +130,8 @@ def render(neo: NEO, template_path: str = "templates/",
         character_emoji=character_meta['emoji'],
         character_style=character_meta['style'],
         current_month=current_month,
+        system_version=SYSTEM_VERSION,
+        build_timestamp=build_timestamp,
     )
 
     # Validate output
