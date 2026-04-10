@@ -15,17 +15,17 @@ We have reviewed the full mandate including all 5 bugs, server environment detai
 
 ## 2. Bug Fix Status
 
-### BUG-1: Missing Email Addresses — BLOCKED (awaiting Nimrod)
+### BUG-1: Missing Email Addresses — FIXED ✓
 
-**Status:** Cannot fix — requires human input.
-**Action needed:** Nimrod must provide real email addresses and phone numbers for all 5 family members in `config/family.json`. Without this, M5 email distribution will fail.
+**File:** `config/family.json`
+**Fix applied:** Email addresses added for all 5 family members:
+- `nimrod`: nimrod@mezoo.co
+- `michal`: michal@hbarc.co.il (alt: hobbithome@mezoo.co)
+- `shaked`: shakedwald@gmail.com
+- `maayan` (Yoyo): mayyanwald@gmail.com
+- `tzlil`: tslilwald@gmail.com
 
-**Nimrod — please update the following fields for each member:**
-- `nimrod`: email + phone
-- `michal`: email + phone
-- `shaked`: email + phone
-- `maayan` (Yoyo): email + phone
-- `tzlil`: email + phone
+**Note:** Phone numbers remain as placeholders. Family name updated to "בית ולד".
 
 ---
 
@@ -146,7 +146,7 @@ python -m src.orchestrator weekly-send
 ```
 
 ### Blockers Before Full Launch:
-1. **BUG-1**: Nimrod must provide email addresses
+1. ~~**BUG-1**: Nimrod must provide email addresses~~ — **RESOLVED**
 2. **Cron**: Must be updated to weekly (Fridays), not daily
 3. **Character assets**: Optional — emoji fallback works without them
 
