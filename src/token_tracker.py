@@ -123,7 +123,7 @@ class TokenTracker:
         self._log(module, operation, model, 100, 50, mock_cost, newsletter_date)
 
         if operation == 'greeting':
-            return "בוקר טוב, משפחת בן-צבי ולד! ☀️ היום ב-9 באפריל 1865 הסתיימה מלחמת האזרחים האמריקנית. יום מצוין לקריאה!"
+            return "בוקר טוב, בית ולד! ☀️ היום ב-9 באפריל 1865 הסתיימה מלחמת האזרחים האמריקנית. יום מצוין לקריאה!"
         elif operation == 'greeting_en':
             return "Good morning! On this day in 1865, the American Civil War ended. A great day for reading!"
         elif operation == 'puzzle':
