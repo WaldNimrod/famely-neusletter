@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
-# Famely Neuslettr — Runner Script
-# Usage: ./run.sh daily-build | daily-send | daily-survey | health-check
+# Family Newsletter — Runner Script
+# Usage: ./run.sh weekly-build | weekly-send | weekly-survey | health-check
+# Note: daily-build/send/survey still work as backward-compat aliases.
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
@@ -20,4 +21,4 @@ if [ -f ".env" ]; then
 fi
 
 # Run the command
-python3 -m src.orchestrator "$@" 2>&1 | tee -a logs/famely-$(date +%Y-%m-%d).log
+python3 -m src.orchestrator "$@" 2>&1 | tee -a logs/newsletter-$(date +%Y-%m-%d).log

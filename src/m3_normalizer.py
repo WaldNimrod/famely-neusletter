@@ -624,6 +624,10 @@ def _build_neo(curated, generated, submissions, family, settings,
             'items': section_items,
         })
 
+    # Add discovery items to count
+    items_selected += len(discovery_items)
+    logger.info(f"[M3] Items selected: {items_selected} total ({len(member_sections)} members, {len(discovery_items)} discovery)")
+
     # Build family content (submissions)
     family_content = []
     for sub in submissions:
@@ -667,6 +671,7 @@ def _build_neo(curated, generated, submissions, family, settings,
             'items_selected': items_selected,
             'sources_scanned': sources_scanned,
             'submissions_count': len(submissions),
+            'discovery_count': len(discovery_items),
             'build_duration_ms': elapsed_ms,
         }
     )

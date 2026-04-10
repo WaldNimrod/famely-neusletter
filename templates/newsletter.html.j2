@@ -3,237 +3,839 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Famely Neuslettr - {{ neo.date }}</title>
+<title>Family Newsletter - {{ neo.date }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --red: #c0392b;
+    --blue: #2471a3;
+    --green: #27ae60;
+    --purple: #7d3c98;
+    --yellow: #f39c12;
+    --orange: #e67e22;
+    --bg: #fdf6e3;
+    --ink: #2c2c2c;
+    --panel-bg: #fff;
+    --nimrod: #2471a3;
+    --michal: #27ae60;
+    --shaked: #7d3c98;
+    --maayan: #c0392b;
+    --tzlil: #e67e22;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f5f3ef; color: #3a3a3a; line-height: 1.75; direction: rtl; padding: 12px; }
-  .container { max-width: 620px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.08); }
+  body {
+    font-family: 'Patrick Hand', 'Comic Sans MS', cursive, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    direction: rtl;
+    background-image: radial-gradient(circle, #e8dcc8 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .page { max-width: 640px; margin: 0 auto; padding: 8px; }
 
-  /* Header — rich gradient with family identity */
-  .header { background: linear-gradient(135deg, #e8f0e4 0%, #c9ddc3 50%, #b8d4af 100%); padding: 36px 24px 30px; text-align: center; position: relative; }
-  .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3b7dd8, #2d8e5e, #6b3fa0, #c4304a, #b8860b); }
-  .header .logo { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #6b8f5e; margin-bottom: 6px; }
-  .header h1 { font-size: 26px; font-weight: 800; color: #2d3a28; margin-bottom: 2px; }
-  .header .date { font-size: 14px; color: #6b8f5e; font-weight: 500; margin-bottom: 4px; }
-  .header .edition { font-size: 11px; color: #8aad7e; letter-spacing: 1px; }
-  .header .greeting { font-size: 15px; color: #4a6343; margin-top: 12px; font-style: italic; line-height: 1.6; }
+  /* ===== COVER / HEADER ===== */
+  .cover {
+    background: var(--panel-bg);
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 6px 6px 0 var(--ink);
+    position: relative;
+  }
+  .cover-top {
+    background: linear-gradient(135deg, var(--red) 0%, #e74c3c 50%, var(--orange) 100%);
+    padding: 24px 20px 16px;
+    text-align: center;
+    position: relative;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,255,255,0.08) 10px, rgba(255,255,255,0.08) 20px);
+  }
+  .cover-top .masthead {
+    font-family: 'Bangers', cursive;
+    font-size: 36px;
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 var(--ink), -1px -1px 0 var(--ink);
+    line-height: 1.1;
+  }
+  .cover-top .subtitle { font-size: 15px; color: rgba(255,255,255,0.9); margin-top: 2px; }
+  .cover-top .edition-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Bangers', cursive;
+    font-size: 13px;
+    padding: 2px 12px;
+    border-radius: 20px;
+    border: 2px solid var(--ink);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+  .cover-body { padding: 16px 20px; position: relative; }
+  .mascot-bubble {
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    padding: 14px 16px;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .mascot-bubble::before { content: ''; position: absolute; bottom: -14px; right: 30px; width: 0; height: 0; border-left: 14px solid transparent; border-right: 0px solid transparent; border-top: 14px solid var(--ink); }
+  .mascot-bubble::after { content: ''; position: absolute; bottom: -10px; right: 32px; width: 0; height: 0; border-left: 11px solid transparent; border-right: 0px solid transparent; border-top: 11px solid #fff; }
+  .mascot-name { font-family: 'Bangers', cursive; font-size: 13px; color: var(--red); margin-top: 16px; padding-right: 4px; letter-spacing: 1px; }
 
-  /* Sections */
-  .section { padding: 22px 24px 26px; border-bottom: 1px solid #f0ede8; }
-  .section:last-of-type { border-bottom: none; }
-  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-  .section-header .icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .section-header h2 { font-size: 17px; font-weight: 700; color: #3a3a3a; }
+  /* ===== OPENER (פתיח) ===== */
+  .opener {
+    background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
+    border: 3px solid var(--yellow);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .opener::before {
+    content: '☀️';
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    font-size: 60px;
+    opacity: 0.12;
+  }
+  .opener h3 { font-family: 'Bangers', cursive; font-size: 18px; color: var(--orange); margin-bottom: 6px; letter-spacing: 1px; }
+  .opener p { font-size: 15px; color: #555; }
+  .opener strong { font-weight: bold; color: var(--ink); }
 
-  /* Family submissions */
-  .family .icon { background: #fef3e2; }
-  .family-card { background: #fefbf6; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; border-right: 4px solid #f0c873; }
-  .family-card .who { font-size: 12px; font-weight: 700; color: #c8942a; margin-bottom: 4px; letter-spacing: 0.3px; }
-  .family-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-  .family-card p { font-size: 14px; color: #555; }
+  /* ===== WEEKLY WEATHER FORECAST ===== */
+  .weather-section {
+    background: var(--panel-bg);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    box-shadow: 4px 4px 0 var(--ink);
+    overflow: hidden;
+  }
+  .weather-header {
+    padding: 10px 16px;
+    font-family: 'Bangers', cursive;
+    font-size: 16px;
+    color: var(--blue);
+    letter-spacing: 1px;
+    border-bottom: 2px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .weather-header .toggle-arrow { font-size: 12px; color: #bbb; transition: transform 0.2s; }
+  .weather-section.expanded .toggle-arrow { transform: rotate(180deg); }
+  .weather-overview {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 2px dashed #eee;
+  }
+  .weather-mini {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    border-radius: 8px;
+  }
+  .weather-mini .w-city { font-family: 'Bangers', cursive; font-size: 12px; color: var(--blue); letter-spacing: 0.5px; }
+  .weather-mini .w-temp { font-size: 22px; font-weight: bold; margin: 2px 0; }
+  .weather-mini .w-icon { font-size: 20px; }
+  .wind-highlight { background: #fff3cd; border: 2px solid var(--orange); border-radius: 8px; animation: pulse 2s infinite; }
+  .wind-highlight .w-city { color: var(--red); }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 
-  /* Member colors */
-  .nimrod .icon { background: #e6f0fa; } .nimrod .cat { color: #3b7dd8; } .nimrod .card { border-right-color: #3b7dd8; }
-  .michal .icon { background: #e6f5ed; } .michal .cat { color: #2d8e5e; } .michal .card { border-right-color: #2d8e5e; }
-  .shaked .icon { background: #ece6f5; } .shaked .cat { color: #6b3fa0; } .shaked .card { border-right-color: #6b3fa0; }
-  .maayan .icon { background: #fce8ec; } .maayan .cat { color: #c4304a; } .maayan .card { border-right-color: #c4304a; }
-  .tzlil .icon { background: #fef3e2; } .tzlil .cat { color: #b8860b; } .tzlil .card { border-right-color: #b8860b; }
+  /* Weather detail (expandable per location) */
+  .weather-details { display: none; padding: 0; }
+  .weather-section.expanded .weather-details { display: block; }
+  .weather-loc {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+  }
+  .weather-loc:last-child { border-bottom: none; }
+  .weather-loc-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .weather-loc-header .loc-icon { font-size: 20px; }
+  .weather-graph {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 50px;
+    padding: 4px 0;
+  }
+  .weather-graph .bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    min-width: 12px;
+    position: relative;
+    transition: height 0.3s;
+  }
+  .weather-graph .bar .bar-label {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #888;
+    font-family: sans-serif;
+    white-space: nowrap;
+  }
+  .weather-graph .bar .day-label {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: #aaa;
+    font-family: sans-serif;
+  }
+  .weather-loc-desc { font-size: 13px; color: #666; margin-top: 8px; line-height: 1.6; }
 
-  /* Article card — with image support */
-  .card { background: #fafaf8; border-radius: 12px; padding: 0; margin-bottom: 12px; border-right: 4px solid #ddd; overflow: hidden; }
-  .card:hover { background: #f5f4f0; }
-  .card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
-  .card-body { padding: 14px 16px; }
-  .card .cat { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 4px; }
-  .card h3 { font-size: 15px; font-weight: 700; line-height: 1.45; margin-bottom: 5px; }
-  .card h3 a { color: #3a3a3a; text-decoration: none; }
-  .card h3 a:hover { text-decoration: underline; }
-  .card .excerpt { font-size: 13px; color: #777; line-height: 1.65; }
-  .card .meta { margin-top: 8px; font-size: 11px; color: #aaa; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .lang-tag { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #eee; color: #888; }
+  /* ===== SECTION SEPARATOR ===== */
+  .section-sep {
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Bangers', cursive;
+    font-size: 14px;
+    color: #ccc;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-sep::before, .section-sep::after { content: ''; flex: 1; height: 2px; background: repeating-linear-gradient(90deg, #ddd, #ddd 4px, transparent 4px, transparent 8px); }
 
-  /* YouTube embed style */
-  .yt-thumb { position: relative; }
-  .yt-thumb::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: rgba(255,0,0,0.85); border-radius: 12px; }
-  .yt-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; z-index: 2; margin-left: 3px; }
+  /* ===== CONTENT GRID ===== */
+  .grid { display: flex; flex-direction: column; gap: 10px; }
 
-  /* Discovery */
-  .discovery .icon { background: #f0e6fa; }
-  .discovery-card { background: linear-gradient(135deg, #faf7fd, #f5f0fa); border-radius: 14px; padding: 16px 18px; border: 1px dashed #d4c0ea; margin-bottom: 12px; }
-  .discovery-card .bridge { font-size: 12px; font-weight: 700; color: #7c50a8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .discovery-card h3 { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
-  .discovery-card h3 a { color: #3a3a3a; text-decoration: none; }
-  .discovery-card .excerpt { font-size: 13px; color: #777; }
-  .discovery-card .meta { margin-top: 6px; font-size: 11px; color: #aaa; }
+  /* ===== LEVEL 1: HERO PANEL ===== */
+  .panel-level1 {
+    background: var(--panel-bg);
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 6px 6px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .panel-level1:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+  .panel-level1 .hero-visual {
+    position: relative;
+    min-height: 220px;
+    background: linear-gradient(135deg, #e8f4fd, #d6eaf8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .panel-level1 .hero-visual img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 3px solid var(--ink);
+  }
+  .character-placeholder {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 90px;
+    height: 120px;
+    background: rgba(255,255,255,0.9);
+    border: 2px dashed var(--ink);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #888;
+    font-family: sans-serif;
+  }
+  .character-placeholder .char-emoji { font-size: 36px; margin-bottom: 4px; }
+  .panel-level1 .hero-body { padding: 16px 20px; }
+  .panel-level1 .hero-body .category {
+    font-family: 'Bangers', cursive;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .panel-level1 .hero-body h3 {
+    font-family: 'Bangers', cursive;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .panel-level1 .hero-body h3 a { color: var(--ink); text-decoration: none; }
+  .panel-level1 .hero-body h3 a:hover { text-decoration: underline; }
+  .panel-level1 .hero-body .excerpt { font-size: 15px; color: #555; line-height: 1.6; margin-bottom: 8px; }
+  .panel-level1 .hero-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12px; color: #999; }
+  .panel-level1 .member-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--panel-bg);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    padding: 2px 10px 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+  }
+  .member-tag .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .source-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-family: sans-serif;
+  }
+  .level-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Bangers', cursive;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+  }
 
-  /* Trivia — Today in History */
-  .trivia .icon { background: #fef3e2; }
-  .trivia-card { background: linear-gradient(135deg, #fefbf6, #fdf6ea); border-radius: 14px; padding: 16px 18px; border-right: 4px solid #daa520; }
-  .trivia-card h3 { font-size: 14px; font-weight: 700; color: #b8860b; margin-bottom: 8px; }
-  .trivia-card p { font-size: 14px; color: #555; line-height: 1.75; }
+  /* ===== LEVEL 2: FEATURE PANELS ===== */
+  .level2-row { display: flex; gap: 10px; }
+  .panel-level2 {
+    flex: 1;
+    background: var(--panel-bg);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .panel-level2:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+  .panel-level2 .feat-visual {
+    height: 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-level2 .feat-visual img { width: 100%; height: 110px; object-fit: cover; display: block; border-bottom: 2px solid var(--ink); }
+  /* L2 fallback visual when no image */
+  .feat-visual-fallback {
+    height: 110px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid var(--ink);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.15) 8px, rgba(255,255,255,0.15) 16px);
+  }
+  .feat-visual-fallback .fallback-emoji { font-size: 42px; opacity: 0.9; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); }
+  .feat-visual-fallback .member-tag { position: absolute; top: 6px; right: 6px; }
+  .panel-level2 .feat-body { padding: 10px 12px; }
+  .panel-level2 .feat-body .category { font-family: 'Bangers', cursive; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+  .panel-level2 .feat-body h3 { font-family: 'Bangers', cursive; font-size: 15px; line-height: 1.25; letter-spacing: 0.3px; margin-bottom: 4px; }
+  .panel-level2 .feat-body h3 a { color: var(--ink); text-decoration: none; }
+  .panel-level2 .feat-body .feat-excerpt { font-size: 13px; color: #666; line-height: 1.5; }
 
-  /* Puzzle */
-  .puzzle-card { background: linear-gradient(135deg, #fefbf6, #fdf6ea); border-radius: 14px; padding: 16px 18px; border-right: 4px solid #b8860b; margin-top: 10px; }
-  .puzzle-card .label { font-size: 13px; font-weight: 700; color: #b8860b; margin-bottom: 6px; }
-  .puzzle-card p { font-size: 14px; color: #555; line-height: 1.75; white-space: pre-line; }
+  /* ===== LEVEL 3: COMPACT PANELS ===== */
+  .panel-level3 {
+    background: var(--panel-bg);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .panel-level3:hover { transform: translate(-1px, -1px); }
+  .panel-level3 .compact-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+  .panel-level3 .member-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .panel-level3 h4 { font-family: 'Bangers', cursive; font-size: 14px; flex: 1; letter-spacing: 0.3px; }
+  .panel-level3 h4 a { color: var(--ink); text-decoration: none; }
+  .panel-level3 .tag { font-size: 10px; background: #f0f0f0; padding: 2px 8px; border-radius: 4px; color: #888; font-family: sans-serif; white-space: nowrap; }
 
-  /* Survey */
-  .survey { background: linear-gradient(135deg, #eef6ff, #e4eefa); }
-  .survey .icon { background: #d6e8ff; }
-  .survey-card { background: #fff; border-radius: 14px; padding: 16px 18px; text-align: center; }
-  .survey-card p { font-size: 15px; font-weight: 600; color: #3a3a3a; line-height: 1.6; }
-  .survey-card .hint { font-size: 12px; color: #999; margin-top: 8px; }
+  /* ===== SHARED: EXPAND/COLLAPSE ===== */
+  .expand-hint { font-size: 11px; color: #bbb; text-align: left; padding: 0 16px 8px; font-family: sans-serif; }
+  .expand-hint::before { content: '▼ '; }
+  .expanded .expand-hint::before { content: '▲ '; }
+  .panel-detail {
+    display: none;
+    padding: 0 16px 14px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    border-top: 2px dashed #eee;
+    margin-top: 2px;
+    padding-top: 10px;
+  }
+  .panel-detail.open { display: block; }
+  .panel-detail .read-more {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Bangers', cursive;
+    font-size: 14px;
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 2px solid var(--blue);
+    letter-spacing: 1px;
+  }
+  .panel-detail .read-more:hover { color: var(--red); border-color: var(--red); }
 
-  /* Footer */
-  .footer { padding: 24px; text-align: center; font-size: 12px; color: #bbb; border-top: 1px solid #f0ede8; background: #fafaf8; }
-  .footer .hearts { margin-bottom: 4px; font-size: 14px; }
-
-  /* LTR for English sections */
+  /* ===== SPECIAL SECTIONS ===== */
+  .discovery-panel { background: #f4ecf7; border-color: var(--purple); border-style: dashed; }
+  .discovery-panel .bridge-text { font-size: 12px; font-weight: bold; color: var(--purple); margin-bottom: 4px; }
+  .puzzle-panel { background: #fef9e7; border-color: var(--yellow); }
+  .puzzle-panel .panel-body { text-align: center; }
+  .puzzle-panel h3 { color: var(--orange); }
+  .history-panel { background: #fef3e2; border-color: var(--orange); }
+  .survey-panel { background: linear-gradient(135deg, #eaf2f8, #d5e8f0); border-color: var(--blue); text-align: center; padding: 20px; }
+  .survey-panel h3 { color: var(--blue); margin-bottom: 8px; }
+  .survey-panel p { font-size: 17px; font-weight: bold; }
+  .wa-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Bangers', cursive;
+    font-size: 16px;
+    padding: 8px 24px;
+    border-radius: 30px;
+    border: 2px solid var(--ink);
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--ink);
+    letter-spacing: 1px;
+  }
+  .wa-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+  .closer {
+    background: linear-gradient(135deg, #e8f8f5, #d5f5e3);
+    border: 3px solid var(--green);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .closer h3 { font-family: 'Bangers', cursive; font-size: 18px; color: var(--green); margin-bottom: 6px; }
+  .closer p { font-size: 15px; color: #555; }
   .ltr { direction: ltr; text-align: left; }
-  .ltr .card { border-right: none; border-left: 4px solid #ddd; }
-  .ltr .nimrod .card { border-left-color: #3b7dd8; }
-  .ltr .shaked .card { border-left-color: #6b3fa0; }
+  .family-strip {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 10px;
+    background: var(--panel-bg);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .family-strip .member-chip {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; font-weight: bold;
+    padding: 4px 10px; border-radius: 20px; border: 2px solid var(--ink);
+  }
+  .family-strip .member-chip .count { font-family: 'Bangers', cursive; font-size: 14px; }
+  .footer-strip { text-align: center; padding: 16px; font-size: 12px; color: #999; }
+  .footer-strip .family-icons { font-size: 20px; margin-bottom: 4px; letter-spacing: 6px; }
+  .mini-mascot { display: inline-block; vertical-align: middle; margin: 0 4px; }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="page">
 
-  <!-- 1. Header -->
-  <div class="header">
-    <div class="logo">Famely Neuslettr</div>
-    <h1>{{ neo.family_name }}</h1>
-    <div class="date">{{ neo.date_formatted or neo.date }}</div>
-    <div class="edition">{{ edition_number or '1' }} #</div>
-    <div class="greeting">{{ neo.greeting }}</div>
+{% set member_colors = {'nimrod': 'var(--nimrod)', 'michal': 'var(--michal)', 'shaked': 'var(--shaked)', 'maayan': 'var(--maayan)', 'tzlil': 'var(--tzlil)'} %}
+{% set member_bg = {'nimrod': '#e6f0fa', 'michal': '#e6f5ed', 'shaked': '#ece6f5', 'maayan': '#fce8ec', 'tzlil': '#fef3e2'} %}
+{% set member_emoji = {'nimrod': '⛵', 'michal': '🌿', 'shaked': '⚗️', 'maayan': '🎪', 'tzlil': '🧮'} %}
+{% set member_names = {'nimrod': 'נימרוד', 'michal': 'מיכל', 'shaked': 'Shaked', 'maayan': 'יויו', 'tzlil': 'צליל'} %}
+
+  <!-- ===== COVER ===== -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="masthead">Family Newsletter!</div>
+      <div class="subtitle">בית ולד</div>
+      <div class="edition-badge">{{ neo.date_formatted or neo.date }} &bull; #{{ edition_number or '1' }}</div>
+    </div>
+    <div class="cover-body">
+      <div class="mascot-bubble">
+        {{ neo.greeting }}
+      </div>
+      <div class="mascot-name">{{ neo.metadata.get('character_emoji', '🎩') }} {{ neo.metadata.get('character_name', 'Cat in the Hat') }} &mdash; {{ neo.metadata.get('character_month', '') }}</div>
+    </div>
   </div>
 
-  {% if neo.family_content %}
-  <!-- 2. Family Submissions -->
-  <div class="section family">
-    <div class="section-header">
-      <div class="icon">📮</div>
-      <h2>ידיעות מהמשפחה</h2>
-    </div>
-    {% for sub in neo.family_content %}
-    <div class="family-card">
-      <div class="who">{{ sub.member_name }} כותב/ת:</div>
-      <h3>{{ sub.headline }}</h3>
-      <p>{{ sub.summary }}</p>
-      {% if sub.link_url %}
-      <div class="meta"><a href="{{ sub.link_url }}" style="color: #c8942a; font-weight: 600;">קישור &larr;</a></div>
-      {% endif %}
+  <!-- ===== OPENER (פתיח) — Style 4: warm, personal ===== -->
+  {% if neo.metadata.get('opener_text') %}
+  <div class="opener">
+    <h3>☀️ מה מחכה לכם השבוע</h3>
+    <p>{{ neo.metadata.get('opener_text') | safe }}</p>
+  </div>
+  {% endif %}
+
+  <!-- ===== FAMILY STRIP ===== -->
+  {% if neo.member_sections %}
+  <div class="family-strip">
+    {% for section in neo.member_sections %}
+    {% set member_count = section['items']|length %}
+    <div class="member-chip" style="background:{{ member_bg.get(section.member_id, '#f0f0f0') }};">
+      <span class="dot" style="background:{{ member_colors[section.member_id] }};width:8px;height:8px;border-radius:50%;"></span>
+      {{ member_names.get(section.member_id, section.member_id) }} <span class="count">{{ member_count }}</span>
     </div>
     {% endfor %}
   </div>
   {% endif %}
 
-  {% set member_config = {
-    'nimrod': {'icon': '⛵', 'title': 'הפינה של נימרוד', 'class': 'nimrod'},
-    'michal': {'icon': '🌿', 'title': 'הפינה של מיכל', 'class': 'michal'},
-    'shaked': {'icon': '⚗️', 'title': "Shaked's Corner", 'class': 'shaked'},
-    'maayan': {'icon': '🎪', 'title': 'הפינה של יויו', 'class': 'maayan'},
-    'tzlil': {'icon': '🧮', 'title': 'הפינה של צליל', 'class': 'tzlil'}
-  } %}
-
-  <!-- 3-7. Member Sections -->
-  {% for section in neo.member_sections %}
-  {% set mc = member_config[section.member_id] %}
-  {% if section['items'] %}
-  <div class="section {{ mc.class }}{% if section.language == 'en' %} ltr{% endif %}">
-    <div class="section-header">
-      <div class="icon">{{ mc.icon }}</div>
-      <h2>{{ mc.title }}</h2>
+  <!-- ===== WEEKLY WEATHER FORECAST ===== -->
+  {% if neo.metadata.get('weather') %}
+  <div class="weather-section" id="weather-section" onclick="toggleWeather()">
+    <div class="weather-header">
+      <span>🌤️ תחזית שבועית</span>
+      <span class="toggle-arrow">▼</span>
     </div>
-    {% for item in section['items'] %}
-    <div class="card">
-      {% if item.image_url %}
-      {% if item.source_name and 'YouTube' in (item.source_name or '') or 'youtube' in (item.source_name or '').lower() %}
-      <div class="yt-thumb">
-        <img class="card-img" src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
-        <div class="yt-play"></div>
+    <!-- Overview row: quick glance at all locations -->
+    <div class="weather-overview">
+      {% for w in neo.metadata['weather'] %}
+      <div class="weather-mini{% if w.get('wind_alert') %} wind-highlight{% endif %}">
+        <div class="w-icon">{{ w.get('icon', '🌤️') }}</div>
+        <div class="w-temp">{{ w.get('temp', '--') }}{% if w.get('is_temp', true) and '°' not in (w.get('temp', '')|string) %}°{% endif %}</div>
+        <div class="w-city">{{ w.get('city', '') }}</div>
       </div>
-      {% else %}
-      <img class="card-img" src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
-      {% endif %}
-      {% endif %}
-      <div class="card-body">
-        <div class="cat">{{ item.category }}</div>
-        <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-        <div class="excerpt">{{ item.summary }}</div>
-        <div class="meta">
-          {{ item.source_name }}
-          <span>&middot;</span>
-          {{ item.published_at[:10] if item.published_at else '' }}
-          {% if item.language == 'en' and section.language != 'en' %}
-          <span class="lang-tag">EN</span>
-          {% endif %}
+      {% endfor %}
+    </div>
+    <!-- Detailed per-location (expanded) -->
+    <div class="weather-details">
+      {% for w in neo.metadata['weather'] %}
+      <div class="weather-loc">
+        <div class="weather-loc-header">
+          <span class="loc-icon">{{ w.get('icon', '🌤️') }}</span>
+          <span>{{ w.get('city', '') }} — {{ w.get('temp', '') }}{% if w.get('is_temp', true) and '°' not in (w.get('temp', '')|string) %}°{% endif %}</span>
         </div>
+        {% if w.get('daily') %}
+        <div class="weather-graph">
+          {% for day in w['daily'] %}
+          {% set bar_h = ((day.get('high', 25) - 5) * 2)|int %}
+          {% if bar_h < 6 %}{% set bar_h = 6 %}{% endif %}
+          {% if bar_h > 46 %}{% set bar_h = 46 %}{% endif %}
+          <div class="bar" style="height:{{ bar_h }}px; background: linear-gradient(to top, {{ member_colors.get('nimrod', 'var(--blue)') }}, {{ '#e74c3c' if day.get('high', 25) > 30 else '#3498db' }});">
+            <span class="bar-label">{{ day.get('high', '') }}°</span>
+            <span class="day-label">{{ day.get('day', '') }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="weather-loc-desc">{{ w.get('description', '') }}{% if w.get('week_summary') %}<br>{{ w.get('week_summary') }}{% endif %}</div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-
-    {% if section.member_id == 'tzlil' and neo.trivia['puzzle'] %}
-    <!-- Puzzle for Tzlil -->
-    <div class="puzzle-card">
-      <div class="label">חידת היום 🧩</div>
-      <p>{{ neo.trivia['puzzle'] }}</p>
-    </div>
-    {% endif %}
   </div>
   {% endif %}
+
+  <div class="grid">
+
+  <!-- ============================== -->
+  <!--       LEVEL 1: HERO            -->
+  <!-- ============================== -->
+  {% set ns = namespace(all_items=[], l2_count=0) %}
+  {% for section in neo.member_sections %}
+    {% for item in section['items'] %}
+      {% set item_extended = {'member_id': section.member_id, 'language': section.language} %}
+      {% set _ = item_extended.update(item) %}
+      {% set ns.all_items = ns.all_items + [item_extended] %}
+    {% endfor %}
   {% endfor %}
 
+  {% if ns.all_items %}
+  <div class="section-sep">⭐ HERO ⭐</div>
+  {% set hero = ns.all_items[0] %}
+  <div class="panel-level1{% if hero.language == 'en' %} ltr{% endif %}" onclick="togglePanel(this)">
+    <div class="hero-visual"{% if not hero.image_url %} style="background: linear-gradient(135deg, {{ member_bg.get(hero.member_id, '#e8f4fd') }}, #d6eaf8);"{% endif %}>
+      {% if hero.image_url %}
+      <img src="{{ hero.image_url }}" alt="{{ hero.title }}" loading="lazy">
+      {% else %}
+      <span style="font-size:64px; opacity:0.7;">{{ member_emoji.get(hero.member_id, '📰') }}</span>
+      {% endif %}
+      <div class="member-tag">
+        <span class="dot" style="background: {{ member_colors[hero.member_id] }};"></span>
+        {{ member_emoji[hero.member_id] }} {{ member_names[hero.member_id] }}
+      </div>
+      <div class="source-badge">{{ hero.source_name }}</div>
+      <div class="level-badge">HERO</div>
+      <div class="character-placeholder">
+        <div class="char-emoji">{{ neo.metadata.get('character_emoji', '🎩') }}</div>
+        <span>character<br>placeholder</span>
+      </div>
+    </div>
+    <div class="hero-body">
+      <div class="category" style="color: {{ member_colors[hero.member_id] }};">{{ hero.category }}</div>
+      <h3><a href="{{ hero.url }}">{{ hero.title }}</a></h3>
+      <div class="excerpt">{{ hero.summary }}</div>
+      <div class="hero-meta">
+        {{ hero.source_name }} &bull; {{ neo.date }} &bull; <span style="background:#eee;padding:1px 6px;border-radius:4px;font-size:10px;">{{ hero.language|upper }}</span>
+      </div>
+    </div>
+    <div class="expand-hint">לחצו לפרטים</div>
+    <div class="panel-detail">
+      <p>{{ hero.get('full_text', hero.summary) }}</p>
+      <a href="{{ hero.url }}" class="read-more">{% if hero.language == 'en' %}Read more &rarr;{% else %}למאמר המלא &larr;{% endif %}</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ============================== -->
+  <!--     LEVEL 2: FEATURE            -->
+  <!-- ============================== -->
+  {% if ns.all_items|length > 1 %}
+  {% set remaining_items = ns.all_items[1:] %}
+
+  {# Count unique members needing representation in L2 #}
+  {% set ns.unique_member_count = 0 %}
+  {% for section in neo.member_sections %}
+    {% if section.member_id != ns.all_items[0].member_id and section['items']|length > 0 %}
+      {% set ns.unique_member_count = ns.unique_member_count + 1 %}
+    {% endif %}
+  {% endfor %}
+  {% set ns.min_l2 = ns.unique_member_count %}
+  {% if ns.min_l2 < 2 %}{% set ns.min_l2 = 2 %}{% endif %}
+
+  {# Determine L2 count: enough to cover members, minimum 2, even number #}
+  {% set ns.l2_count = 0 %}
+  {% set ns.l2_done = false %}
+  {% for item in remaining_items %}
+    {% if not ns.l2_done %}
+      {% set ns.l2_count = ns.l2_count + 1 %}
+      {% if ns.l2_count >= ns.min_l2 and ns.l2_count % 2 == 0 %}
+        {% set ns.l2_done = true %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if ns.l2_count % 2 != 0 and ns.l2_count < remaining_items|length %}
+    {% set ns.l2_count = ns.l2_count + 1 %}
+  {% elif ns.l2_count % 2 != 0 %}
+    {% set ns.l2_count = ns.l2_count - 1 %}
+  {% endif %}
+  {% if ns.l2_count < 2 and remaining_items|length >= 2 %}{% set ns.l2_count = 2 %}{% endif %}
+
+  {% set level2_items = remaining_items[:ns.l2_count] %}
+
+  {% if level2_items %}
+  <div class="section-sep">📰 FEATURE 📰</div>
+
+  {% for item in level2_items %}
+    {% if loop.index is odd %}
+  <div class="level2-row">
+    {% endif %}
+    <div class="panel-level2{% if item.language == 'en' %} ltr{% endif %}" onclick="togglePanel(this)">
+      {# ALWAYS show a visual — image or fallback gradient with emoji #}
+      {% if item.image_url %}
+      <div class="feat-visual">
+        <img src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
+        <div class="member-tag" style="position:absolute;top:6px;{% if item.language == 'en' %}left{% else %}right{% endif %}:6px;">
+          <span class="dot" style="background:{{ member_colors[item.member_id] }};"></span> {{ member_emoji[item.member_id] }}
+        </div>
+      </div>
+      {% else %}
+      <div class="feat-visual-fallback" style="background-color: {{ member_bg.get(item.member_id, '#f0f0f0') }};">
+        <span class="fallback-emoji">{{ member_emoji.get(item.member_id, '📰') }}</span>
+        <div class="member-tag" style="position:absolute;top:6px;{% if item.language == 'en' %}left{% else %}right{% endif %}:6px;">
+          <span class="dot" style="background:{{ member_colors[item.member_id] }};"></span> {{ member_emoji[item.member_id] }}
+        </div>
+      </div>
+      {% endif %}
+      <div class="feat-body">
+        <div class="category" style="color:{{ member_colors[item.member_id] }};">{{ item.category }}</div>
+        <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+        <div class="feat-excerpt">{{ item.summary }}</div>
+      </div>
+      <div class="expand-hint">{% if item.language == 'en' %}tap for more{% else %}לחצו לפרטים{% endif %}</div>
+      <div class="panel-detail">
+        <p>{{ item.get('full_text', item.summary) }}</p>
+        <a href="{{ item.url }}" class="read-more">{% if item.language == 'en' %}Read more &rarr;{% else %}למאמר &larr;{% endif %}</a>
+      </div>
+    </div>
+    {% if loop.index is even or loop.last %}
+  </div>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endif %}
+
+  <!-- ============================== -->
+  <!--     LEVEL 3: COMPACT           -->
+  <!-- ============================== -->
+  {% set l3_start = 1 + ns.l2_count %}
+  {% if ns.all_items|length > l3_start %}
+  <div class="section-sep">📋 עוד השבוע 📋</div>
+
+  {% for item in ns.all_items[l3_start:] %}
+  <div class="panel-level3{% if item.language == 'en' %} ltr{% endif %}" onclick="togglePanel(this)">
+    <div class="compact-body">
+      <div class="member-icon" style="background:{{ member_colors[item.member_id] }};color:#fff;">{{ member_emoji[item.member_id] }}</div>
+      <h4><a href="{{ item.url }}">{{ item.title }}</a></h4>
+      <span class="tag">{{ item.category }}</span>
+    </div>
+    <div class="panel-detail">
+      <p>{{ item.summary }}</p>
+      <a href="{{ item.url }}" class="read-more">{% if item.language == 'en' %}Read more &rarr;{% else %}למאמר &larr;{% endif %}</a>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <!-- ===== DISCOVERY ===== -->
   {% if neo.discovery %}
-  <!-- 8. Discovery -->
-  <div class="section discovery">
-    <div class="section-header">
-      <div class="icon">🔮</div>
-      <h2>גילוי היום</h2>
+  <div class="section-sep">🔮 גילוי 🔮</div>
+
+  {% for item in neo.discovery %}
+  <div class="panel-level3 discovery-panel" onclick="togglePanel(this)" style="border-style:dashed;">
+    <div style="padding: 12px 14px;">
+      <div class="bridge-text">🔮 {{ item.bridge_text }}</div>
+      <h4 style="font-family:'Bangers',cursive; font-size:16px;"><a href="{{ item.url }}" style="color:var(--ink); text-decoration:none;">{{ item.title }}</a></h4>
+      {% if item.summary %}<p style="font-size:13px; color:#666; margin-top:4px;">{{ item.summary[:120] }}{% if item.summary|length > 120 %}...{% endif %}</p>{% endif %}
     </div>
-    {% for item in neo.discovery %}
-    <div class="discovery-card">
-      <div class="bridge">💡 {{ item.bridge_text }}</div>
-      <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-      <div class="excerpt">{{ item.summary }}</div>
-      <div class="meta">{{ item.source_name }}</div>
+    <div class="expand-hint">לחצו לפרטים</div>
+    <div class="panel-detail">
+      <p>{{ item.summary }}</p>
+      <a href="{{ item.url }}" class="read-more">למאמר המלא &larr;</a>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <!-- ===== PUZZLE ===== -->
+  {% if neo.trivia.get('puzzle') %}
+  <div class="section-sep">🧩 חידה 🧩</div>
+
+  <div class="panel-level3 puzzle-panel" style="border-color:var(--yellow);">
+    <div style="padding: 14px 16px; text-align:center;">
+      <h3 style="font-family:'Bangers',cursive; font-size:18px; color:var(--orange); margin-bottom:8px;">
+        <span class="mini-mascot" style="font-size:24px;">{{ neo.metadata.get('character_emoji', '🎩') }}</span>
+        חידת השבוע
+      </h3>
+      <p style="font-size:16px; line-height:1.8; white-space:pre-line;">{{ neo.trivia['puzzle'] }}{% if neo.trivia.get('answer') %}<br><br><strong style="color:var(--orange);">תשובה מהשבוע שעבר: {{ neo.trivia['answer'] }}</strong>{% endif %}</p>
+    </div>
   </div>
   {% endif %}
 
-  <!-- 9. Trivia / Today in History -->
+  <!-- ===== TODAY IN HISTORY ===== -->
   {% if neo.trivia.get('history') %}
-  <div class="section trivia">
-    <div class="section-header">
-      <div class="icon">📜</div>
-      <h2>היום בהיסטוריה</h2>
-    </div>
-    <div class="trivia-card">
-      <p>{{ neo.trivia['history'] }}</p>
+  <div class="section-sep">📜 היום 📜</div>
+
+  <div class="panel-level3 history-panel" style="border-color:var(--orange);">
+    <div style="padding: 12px 14px;">
+      <div style="font-family:'Bangers',cursive; font-size:13px; color:var(--orange); letter-spacing:1px; margin-bottom:4px;">📜 היום בהיסטוריה</div>
+      <p style="font-size:14px;">{{ neo.trivia['history'] }}</p>
     </div>
   </div>
   {% endif %}
 
-  <!-- 10. Survey -->
+  <!-- ===== SURVEY ===== -->
   {% if neo.survey_question %}
-  <div class="section survey">
-    <div class="section-header">
-      <div class="icon">💬</div>
-      <h2>שאלת היום</h2>
-    </div>
-    <div class="survey-card">
-      <p>{{ neo.survey_question }}</p>
-      <div class="hint">ענו בוואטסאפ!</div>
+  <div class="section-sep">💬 משוב 💬</div>
+
+  <div class="panel-level3 survey-panel" style="border-color:var(--blue); text-align:center;">
+    <div style="padding:16px;">
+      <h3 style="font-family:'Bangers',cursive; font-size:18px; color:var(--blue); margin-bottom:8px;">
+        <span class="mini-mascot" style="font-size:24px;">{{ neo.metadata.get('character_emoji', '🎩') }}</span>
+        שאלת השבוע
+      </h3>
+      <p style="font-size:17px; font-weight:bold;">{{ neo.survey_question }}</p>
+      <div style="font-size:12px; color:#888; margin-top:8px;">
+        {% set wa_link = neo.metadata.get('whatsapp_group_link', '') %}
+        {% if wa_link %}
+        <a href="{{ wa_link }}" style="color:#25D366; text-decoration:none; font-weight:bold;">ענו בקבוצת וואטסאפ! 📱</a>
+        {% elif neo.metadata.get('whatsapp_number') %}
+        <a href="https://wa.me/{{ neo.metadata['whatsapp_number'] }}?text={{ neo.survey_question | urlencode }}" style="color:#25D366; text-decoration:none; font-weight:bold;">ענו בוואטסאפ! 📱</a>
+        {% else %}
+        ענו בקבוצת וואטסאפ! 📱
+        {% endif %}
+      </div>
     </div>
   </div>
   {% endif %}
 
-  <!-- 11. Footer -->
-  <div class="footer">
-    <div class="hearts">⛵ 🌿 ⚗️ 🎪 🧮</div>
-    Famely Neuslettr &middot; powered by AI with ❤️ &middot; {{ neo.date_formatted or neo.date }}
+  </div><!-- /grid -->
+
+  <!-- ===== CLOSER (סגיר) — Style 4: warm ===== -->
+  {% if neo.metadata.get('closer_text') %}
+  <div class="closer">
+    <h3>🌙 שבוע נפלא!</h3>
+    <p>{{ neo.metadata.get('closer_text') | safe }}</p>
+    <div style="margin-top:10px; text-align:center;">
+      <span style="font-size:40px;">{{ neo.metadata.get('character_emoji', '🎩') }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer-strip">
+    <div class="family-icons">⛵ 🌿 ⚗️ 🎪 🧮</div>
+    Family Newsletter &bull; #{{ edition_number or '1' }} &bull; {{ neo.date_formatted or neo.date }}
+    <br><span style="font-family:sans-serif; font-size:11px; color:#bbb; letter-spacing:0.5px;">by <strong style="color:#999;">AgentsOS</strong> @ nimrod.bio</span>
   </div>
 
-</div>
+</div><!-- /page -->
+
+<script>
+function togglePanel(el) {
+  var detail = el.querySelector('.panel-detail');
+  if (!detail) return;
+  var isOpen = detail.classList.contains('open');
+  document.querySelectorAll('.panel-detail.open').forEach(function(d) {
+    d.classList.remove('open');
+    d.parentElement.classList.remove('expanded');
+  });
+  if (!isOpen) {
+    detail.classList.add('open');
+    el.classList.add('expanded');
+  }
+}
+function toggleWeather() {
+  var sec = document.getElementById('weather-section');
+  sec.classList.toggle('expanded');
+}
+</script>
 </body>
 </html>

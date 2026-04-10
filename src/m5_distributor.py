@@ -1,5 +1,5 @@
 """
-Famely Neuslettr — M5 Distributor
+Family Newsletter — M5 Distributor
 FTP upload + WhatsApp/Email send per LOD400 §7.
 """
 
@@ -124,6 +124,18 @@ def _ftp_connect(host: str, port: int) -> ftplib.FTP:
     return ftp
 
 
+def _ftp_mkd_recursive(ftp, path):
+    """Create remote directory recursively (like mkdir -p)."""
+    dirs = path.strip('/').split('/')
+    current = ''
+    for d in dirs:
+        current = f"{current}/{d}"
+        try:
+            ftp.mkd(current)
+        except ftplib.error_perm:
+            pass  # directory exists
+
+
 def ftp_upload(html_path: str, date: str, settings: Settings) -> str:
     """Upload HTML to FTP server. Returns public URL."""
     host, user, passwd, port = ftp_credentials()
@@ -140,11 +152,8 @@ def ftp_upload(html_path: str, date: str, settings: Settings) -> str:
             ftp = _ftp_connect(host, port)
             ftp.login(user, passwd)
 
-            # Create directory
-            try:
-                ftp.mkd(remote_dir)
-            except ftplib.error_perm:
-                pass  # directory exists
+            # Create directory recursively (handles nested paths)
+            _ftp_mkd_recursive(ftp, remote_dir)
 
             # Upload
             with open(html_path, 'rb') as f:

@@ -7,20 +7,98 @@
       "ים ושייט",
       "סקי",
       "משחקי חברה",
-      "זמן איכות משפחתי"
+      "זמן איכות משפחתי",
+      "בישול ביחד",
+      "מאפים",
+      "גינון"
     ],
     "topics_en": [
       "Sea & sailing",
       "Skiing",
       "Board games",
-      "Family quality time"
+      "Family quality time",
+      "Cooking together",
+      "Baking",
+      "Gardening"
     ],
     "values": [
       "תקשורת עמוקה",
       "סקרנות",
       "הרפתקאות",
       "קיימות"
-    ]
+    ],
+    "bookshelf": {
+      "_note": "ספרים מהמדף המשפחתי — צולמו 2026-04-10, רקע לפרופיל",
+      "books": [
+        { "title_he": "חולית", "title_en": "Dune", "author": "פרנק הרברט / Frank Herbert", "category": "sci-fi", "themes": ["ecology", "power", "desert", "survival"] },
+        { "title_he": "זבל אנושי", "title_en": "The Humanure Handbook", "author": "ג'וזף ג'נקינס / Joseph Jenkins", "category": "sustainability", "themes": ["composting", "ecology", "humanure", "sustainability"] },
+        { "title_he": "חקלאות ביו-דינמית", "title_en": "Agriculture Course", "author": "רודולף שטיינר / Rudolf Steiner", "category": "biodynamic", "themes": ["biodynamic", "agriculture", "anthroposophy", "soil"] },
+        { "title_he": "סופה של אליס", "title_en": "Alice's Storm", "author": "גלית דהן קרליבך", "category": "israeli-literature", "themes": ["family", "identity", "israeli", "women"] },
+        { "title_he": "כיצד קונים דעת העולמות העליונים?", "title_en": "How to Know Higher Worlds?", "author": "רודולף שטיינר / Rudolf Steiner", "category": "anthroposophy", "themes": ["spirituality", "consciousness", "inner-development"] },
+        { "title_he": "גוף, נפש, רוח", "title_en": "Theosophy: Body, Soul, Spirit", "author": "רודולף שטיינר / Rudolf Steiner", "category": "anthroposophy", "themes": ["body-mind-spirit", "anthroposophy", "consciousness"] },
+        { "title_he": "קטן זה יפה", "title_en": "Small is Beautiful", "author": "א.פ. שומאכר / E.F. Schumacher", "category": "economics-sustainability", "themes": ["economics", "sustainability", "small-scale", "human-centered"] },
+        { "title_he": "טוטם הזאב", "title_en": "Wolf Totem", "author": "ג'יאנג רונג / Jiang Rong", "category": "world-literature", "themes": ["nature", "wolves", "mongolia", "ecology", "freedom"] },
+        { "title_he": "הקשת", "title_en": "The Archer", "author": "פאולו קואלו / Paulo Coelho", "category": "spirituality", "themes": ["focus", "practice", "zen", "mastery"] },
+        { "title_he": "גינת בר", "title_en": "My Wild Garden", "author": "מאיר שלו / Meir Shalev", "category": "nature-israeli", "themes": ["wildflowers", "nature", "israeli-landscape", "botany"] },
+        { "title_he": "חמשת האנשים שתפגוש בגן-עדן", "title_en": "The Five People You Meet in Heaven", "author": "מיצ'י אלבום / Mitch Albom", "category": "fiction", "themes": ["meaning", "afterlife", "connections", "life-lessons"] },
+        { "title_he": "דבורים", "title_en": "Bees", "author": "רודולף שטיינר / Rudolf Steiner", "category": "biodynamic", "themes": ["bees", "nature", "anthroposophy", "beekeeping"] },
+        { "title_he": "היסטוריה של מהירות", "title_en": "A History of Speed", "author": "עמית נויפלד / Amit Neufeld", "category": "philosophy", "themes": ["slowness", "speed", "modern-life", "mindfulness"] },
+        { "title_he": "ארבע ההסכמות", "title_en": "The Four Agreements", "author": "דון מיגל רואיס / Don Miguel Ruiz", "category": "spirituality", "themes": ["personal-freedom", "toltec-wisdom", "self-improvement"] },
+        { "title_he": "ורד הכלב", "title_en": "Dog Rose", "author": "עליזה גלקין-סמית / Aliza Galkin-Smith", "category": "nature-botany", "themes": ["botany", "wildflowers", "nature", "art"] }
+      ],
+      "profile_insights": {
+        "dominant_themes": ["anthroposophy-steiner", "sustainability-ecology", "nature-botany", "spirituality", "world-literature", "slow-living"],
+        "steiner_count": 4,
+        "nature_count": 6,
+        "relevance": {
+          "michal": ["anthroposophy", "mindfulness", "nature", "ecology"],
+          "nimrod": ["sustainability", "biodynamic", "bees", "gardening", "ecology"],
+          "shared": ["nature", "spirituality", "slow-living", "literature"]
+        }
+      }
+    },
+    "activities": {
+      "cooking": {
+        "who": "כולם",
+        "note": "טבעוניים, אוהבים לבשל ביחד"
+      },
+      "baking": {
+        "who": [
+          "nimrod",
+          "tzlil"
+        ],
+        "note": "צליל ונימרוד אופים ביחד"
+      },
+      "alias": {
+        "who": "כולם",
+        "note": "המשחק החדש של המשפחה"
+      },
+      "minecraft": {
+        "who": [
+          "tzlil",
+          "shaked"
+        ],
+        "note": "קשה עכשיו ששקד רחוק, יש לו רק טלפון"
+      },
+      "vr": {
+        "who": [
+          "maayan",
+          "tzlil"
+        ],
+        "note": "Oculus ישן של שקד חזר לחיים, הבנות משחקות"
+      }
+    },
+    "locations": {
+      "home": {
+        "name": "פרדס חנה",
+        "name_en": "Pardes Hanna"
+      },
+      "shaked": {
+        "name": "באזל",
+        "name_en": "Basel",
+        "note": "שקד לומד גרמנית בשוויץ"
+      }
+    }
   },
   "members": [
     {
@@ -174,7 +252,13 @@
         "max_items_per_day": 5,
         "preferred_format": "summary",
         "preferred_length": "medium"
-      }
+      },
+      "personality": "יזם, חלומני ים, בנאי מערכות. רואה את הטכנולוגיה ככלי לחיים טובים יותר.",
+      "fun_facts": [
+        "מגדל מזון בגינה",
+        "סקיפר מוסמך",
+        "אופה עם צליל"
+      ]
     },
     {
       "id": "michal",
@@ -287,6 +371,16 @@
           "type": "website",
           "url": "https://abadacapoeiraisrael.org.il",
           "name": "ABADÁ Capoeira Israel"
+        },
+        {
+          "type": "podcast",
+          "url": "",
+          "name": "פודקאסט: שיר אחד"
+        },
+        {
+          "type": "podcast",
+          "url": "",
+          "name": "פודקאסט: תחושת בטן"
         }
       ],
       "content_preferences": {
@@ -306,7 +400,17 @@
           "note": ""
         }
       ],
-      "_discovery_note": "Need to discover actual Instagram follows, podcast subscriptions from Michal directly"
+      "_discovery_note": "צריך לגלות: הספר האחרון שקראה, ערוצי יוטיוב שצופה, מה מבשלת",
+      "personality": "אישה של לב, שיתוף וחברים קרובים. רגישה, יצירתית, מחוברת לטבע ולאנשים.",
+      "podcasts": [
+        "שיר אחד",
+        "תחושת בטן"
+      ],
+      "fun_facts": [
+        "בוגרת בצלאל",
+        "פרויקט UNESCO בברזיל",
+        "מתרגלת קפוארה ומיינדפולנס"
+      ]
     },
     {
       "id": "shaked",
@@ -319,7 +423,7 @@
       "age": 18,
       "phone": null,
       "language_preference": "en",
-      "bio": "Currently studying German in Switzerland, preparing for a Chemistry degree. Voracious English reader - complex sci-fi, web novels, weird and wonderful fiction. Communicates via Discord. Extremely intelligent, mostly English-speaking. Private by nature.",
+      "bio": "Currently studying German in Basel, Switzerland, preparing for a Chemistry degree. Voracious English reader - complex sci-fi, web novels, weird and wonderful fiction. Makes friends online and visits them IRL. Plays Nintendo Switch. Extremely intelligent, mostly English-speaking. Very private by nature - respect this always.",
       "interests": [
         {
           "topic": "Sci-Fi & Web Fiction",
@@ -356,9 +460,12 @@
           "subtopics": [
             "indie games",
             "strategy",
-            "PC gaming"
+            "PC gaming",
+            "Nintendo Switch",
+            "VR",
+            "Oculus"
           ],
-          "priority": "low"
+          "priority": "medium"
         }
       ],
       "media_sources": [
@@ -401,7 +508,14 @@
         }
       ],
       "communication_channel": "discord",
-      "_note": "Most private family member. ALL content in English. Respect his independence and intelligence. Don't dumb things down."
+      "_note": "EXTREMELY PRIVATE. Never share personal details. ALL content in English. Respect his independence and intelligence. Dont dumb things down. Cynical humor is his thing. Uses English abbreviations.",
+      "personality": "חנון מתוק עם צד ציני. מאוד פרטי. מדבר אנגלית בקיצורים. עושה חברים ברשת, נוסע לבקר אותם.",
+      "fun_facts": [
+        "נוסע לגרמניה לבקר חברים",
+        "משחק Nintendo Switch בשוויץ",
+        "ה-Oculus הישן שלו חזר לחיים עם הבנות"
+      ],
+      "privacy_level": "maximum"
     },
     {
       "id": "maayan",
@@ -470,6 +584,21 @@
             "dance class"
           ],
           "priority": "medium"
+        },
+        {
+          "topic": "מוזיקה",
+          "topic_en": "Music",
+          "subtopics": [
+            "רוק",
+            "פופ-רוק",
+            "מוזיקה",
+            "שירים",
+            "rock",
+            "pop",
+            "music",
+            "playlist"
+          ],
+          "priority": "low"
         }
       ],
       "media_sources": [
@@ -526,7 +655,14 @@
           "note": "קרקס שבזי - הקרקס שלה"
         }
       ],
-      "_note": "Very social and visual. Content should be engaging, visual, and shareable. Include audition dates and circus school info. ALWAYS call her יויו."
+      "_note": "Very social and visual. Content should be engaging, visual, and shareable. Include audition dates and circus school info. ALWAYS call her יויו.",
+      "personality": "חברתית מאוד מאוד. מלאה אנרגיה. זהירה ברשתות (צופה הרבה TikTok אבל לא מפרסמת). אוהבת מוזיקה רוקית, מה שחברות שומעות.",
+      "fun_facts": [
+        "חברות זה הכח שלה",
+        "צופה TikTok אבל זהירה מה לפרסם",
+        "משחקת VR עם צליל"
+      ],
+      "_discovery_note": "צריך לגלות: מה צופה בטלפון, אילו חשבונות עוקבת, במה מתלהבת"
     },
     {
       "id": "tzlil",
@@ -539,7 +675,7 @@
       "age": 13,
       "phone": null,
       "language_preference": "he",
-      "bio": "המדענית של המשפחה. אוהבת מתמטיקה, חידות, חשיבה מחוץ לקופסה. מתעניינת בהיסטוריה, כלכלה, וידע כללי. חכמה ומסקרנת.",
+      "bio": "המדענית של המשפחה. אוהבת מתמטיקה, חידות, חשיבה מחוץ לקופסה. מתעניינת בהיסטוריה, כלכלה, וידע כללי. דיסלקטית — מעדיפה פודקאסטים ויוטיוב על קריאה. אופה עם אבא. משחקת VR ומיינקראפט.",
       "interests": [
         {
           "topic": "מתמטיקה וחידות",
@@ -587,6 +723,32 @@
             "עובדות מפתיעות"
           ],
           "priority": "medium"
+        },
+        {
+          "topic": "משחקי מחשב",
+          "topic_en": "Gaming",
+          "subtopics": [
+            "Minecraft",
+            "מיינקראפט",
+            "VR",
+            "Oculus",
+            "gaming",
+            "משחקים"
+          ],
+          "priority": "low"
+        },
+        {
+          "topic": "אפייה ובישול",
+          "topic_en": "Baking & Cooking",
+          "subtopics": [
+            "אפייה",
+            "מאפים",
+            "עוגות",
+            "baking",
+            "vegan baking",
+            "טבעוני"
+          ],
+          "priority": "medium"
         }
       ],
       "media_sources": [
@@ -621,7 +783,18 @@
         "preferred_format": "summary",
         "preferred_length": "medium"
       },
-      "_note": "Loves intellectual challenges. Every newsletter should have a dedicated math puzzle/riddle for her. Don't make it too easy - she likes hard ones."
+      "_note": "Loves intellectual challenges. Every newsletter should have a dedicated math puzzle/riddle for her. Don't make it too easy - she likes hard ones.",
+      "personality": "המדענית, הסקרנית, האופה. דיסלקטית אבל חכמה מאוד. פודקאסטים במקום קריאה. צופה יוטיוב המון.",
+      "podcasts": [
+        "התשובה",
+        "סערה מושלמת"
+      ],
+      "fun_facts": [
+        "אופה עם נימרוד",
+        "משחקת Minecraft (מחכה לשקד)",
+        "משחקת VR עם יויו"
+      ],
+      "_discovery_note": "צריך לגלות: אילו ערוצי יוטיוב צופה (בנוסף לידועים), משחקי מיינקראפט"
     }
   ]
 }

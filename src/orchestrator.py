@@ -1,11 +1,12 @@
 """
-Famely Neuslettr — Orchestrator
+Family Newsletter — Orchestrator
 CLI entry points per LOD400 §10.
 Usage:
-    python -m src.orchestrator daily-build [--mock]
-    python -m src.orchestrator daily-send [--mock]
-    python -m src.orchestrator daily-survey [--mock]
+    python -m src.orchestrator weekly-build [--mock]
+    python -m src.orchestrator weekly-send [--mock]
+    python -m src.orchestrator weekly-survey [--mock]
     python -m src.orchestrator health-check
+Note: daily-build/send/survey are aliases for backward compatibility.
 """
 
 import argparse
@@ -48,10 +49,10 @@ logging.basicConfig(
 logger = logging.getLogger('famely')
 
 
-def cmd_daily_build(args):
-    """M1 → M2 → M3 → M4: Build today's newsletter."""
+def cmd_weekly_build(args):
+    """M1 → M2 → M3 → M4: Build this week's newsletter."""
     logger.info("=" * 60)
-    logger.info("DAILY BUILD starting")
+    logger.info("WEEKLY BUILD starting")
     logger.info("=" * 60)
 
     # Load config
@@ -105,10 +106,10 @@ def cmd_daily_build(args):
     logger.info(f"  Duration: {neo.metadata['build_duration_ms']}ms")
 
     # Token cost
-    daily_cost = db.get_daily_cost(today)
-    logger.info(f"  Token cost today: ${daily_cost:.4f}")
-    if daily_cost > settings.budget.get('daily_alert_usd', 0.50):
-        logger.warning(f"  BUDGET ALERT: ${daily_cost:.4f} exceeds daily limit!")
+    weekly_cost = db.get_daily_cost(today)
+    logger.info(f"  Token cost this build: ${weekly_cost:.4f}")
+    if weekly_cost > settings.budget.get('weekly_alert_usd', 1.00):
+        logger.warning(f"  BUDGET ALERT: ${weekly_cost:.4f} exceeds weekly limit!")
 
     logger.info("=" * 60)
 
@@ -116,10 +117,10 @@ def cmd_daily_build(args):
     return html_path
 
 
-def cmd_daily_send(args):
-    """M5: Distribute today's newsletter via FTP + WhatsApp/Email."""
+def cmd_weekly_send(args):
+    """M5: Distribute this week's newsletter via FTP + WhatsApp/Email."""
     logger.info("=" * 60)
-    logger.info("DAILY SEND starting")
+    logger.info("WEEKLY SEND starting")
     logger.info("=" * 60)
 
     config_dir = args.config or "config/"
@@ -173,10 +174,10 @@ def cmd_daily_send(args):
     db.close()
 
 
-def cmd_daily_survey(args):
-    """M5: Send daily survey at 21:00."""
+def cmd_weekly_survey(args):
+    """M5: Send weekly feedback survey."""
     logger.info("=" * 60)
-    logger.info("DAILY SURVEY starting")
+    logger.info("WEEKLY SURVEY starting")
     logger.info("=" * 60)
 
     config_dir = args.config or "config/"
@@ -276,9 +277,11 @@ def cmd_webhook(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Famely Neuslettr Orchestrator')
+    parser = argparse.ArgumentParser(description='Family Newsletter Orchestrator')
     parser.add_argument('command', choices=[
-        'daily-build', 'daily-send', 'daily-survey', 'health-check', 'webhook'
+        'weekly-build', 'weekly-send', 'weekly-survey',
+        'daily-build', 'daily-send', 'daily-survey',  # backward compat aliases
+        'health-check', 'webhook',
     ])
     parser.add_argument('--mock', action='store_true', help='Use mock data (no external calls)')
     parser.add_argument('--config', default='config/', help='Config directory')
@@ -289,9 +292,12 @@ def main():
     args = parser.parse_args()
 
     commands = {
-        'daily-build': cmd_daily_build,
-        'daily-send': cmd_daily_send,
-        'daily-survey': cmd_daily_survey,
+        'weekly-build': cmd_weekly_build,
+        'weekly-send': cmd_weekly_send,
+        'weekly-survey': cmd_weekly_survey,
+        'daily-build': cmd_weekly_build,   # backward compat
+        'daily-send': cmd_weekly_send,     # backward compat
+        'daily-survey': cmd_weekly_survey, # backward compat
         'health-check': cmd_health_check,
         'webhook': cmd_webhook,
     }

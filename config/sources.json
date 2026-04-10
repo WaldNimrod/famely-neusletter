@@ -66,7 +66,7 @@
     "type": "rss",
     "url": "https://www.anthropic.com/feed.xml",
     "trust_score": 0.9,
-    "status": "active",
+    "status": "degraded",
     "linked_members": [
       "nimrod"
     ],
@@ -90,7 +90,7 @@
     "type": "rss",
     "url": "https://www.dezeen.com/feed/",
     "trust_score": 0.9,
-    "status": "active",
+    "status": "degraded",
     "linked_members": [
       "michal"
     ],
@@ -102,7 +102,7 @@
     "type": "web",
     "url": "https://www.mindful.org",
     "trust_score": 0.7,
-    "status": "active",
+    "status": "degraded",
     "linked_members": [
       "michal"
     ],
@@ -114,7 +114,7 @@
     "type": "rss",
     "url": "https://www.nature.com/nchem.rss",
     "trust_score": 0.95,
-    "status": "active",
+    "status": "degraded",
     "linked_members": [
       "shaked"
     ],
@@ -186,7 +186,7 @@
     "type": "web",
     "url": "https://mathpickle.com",
     "trust_score": 0.7,
-    "status": "active",
+    "status": "degraded",
     "linked_members": [
       "tzlil"
     ],
