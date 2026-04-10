@@ -6,5 +6,5 @@ python-dotenv>=1.0
 markdown>=3.5
 
 # Optional (for production)
-# anthropic>=0.40         # Claude API SDK
+anthropic>=0.40         # Claude API SDK (recommended; else HTTP fallback in token_tracker)
 # twilio>=9.0             # WhatsApp via Twilio

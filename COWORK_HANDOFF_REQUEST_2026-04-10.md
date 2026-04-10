@@ -5,7 +5,7 @@
 **מקור:** סביבה מקומית (Local Agent / Team 100)  
 **יעד מוצרי דחוף:** ניוזלטר **חי**, איכותי, **מוכן להפצה ביום ראשון** (חלון ביצוע: שישי–שבת).
 
-**עדכון מאוחר (לפני מסירה ל-Cowork):** אומת מקומית שבקובץ **`.env`** (לא נכלל ב-git) מוגדרים משתנים נדרשים לצינור, כולל **`ANTHROPIC_API_KEY`** במבנה תקין (`sk-ant…`, אורך תקין). מומלץ להריץ מחדש **`weekly-build`** ואז **`weekly-send`** לאחר ניקוי DB/HTML לתאריך המהדורה — כדי שה-HTML ישקף קריאות Claude אמיתיות ולא את ריצת הפיילוט הקודמת (mock).
+**עדכון ביצוע אוטומטי — 2026-04-10 (~14:24–14:31 מקומי):** הורצו **`weekly-build`** (אחרי ניקוי DB/HTML) ו-**`weekly-send`**. תוצאות מלאות ב-[`REPORT_PILOT_v3.0.0_2026-04-10.md`](REPORT_PILOT_v3.0.0_2026-04-10.md). בקצרה: **כל קריאות Anthropic נכשלו ב-HTTP 401** (מפתח ב-`.env` נדחה על ידי ה-API — יש לתקן/לסובב מפתח). **ה-FTP נכשל ב-530 Login incorrect** — מיילים לא נשלחו. הותקן חבילת **`anthropic`** ב-`venv` והופעלה ב-[`requirements.txt`](requirements.txt).
 
 ---
 
@@ -47,14 +47,14 @@
 | פעולה | תוצאה |
 |--------|--------|
 | `git fetch` / `git pull origin main` | עדכני; אומת קומיט `7ab2b14` ותג `v3.0.0` |
-| יצירת `venv`, `pip install -r requirements.txt` | בוצע |
-| מחיקת `data/famely.db` ו-HTML ישן לתאריך הדגמה | בוצע לפני בנייה |
-| `python -m src.orchestrator weekly-build` (ללא `--mock`) | הושלם בפיילוט הראשון כש-**`ANTHROPIC_API_KEY` עדיין לא היה ב-.env** → M3 ב-**mock AI**. לאחר עדכון `.env` יש להריץ בנייה מחדש לקבלת טקסט Claude אמיתי. |
-| ולידציות (גודל, grep, קישורים) | בפיילוט הראשון: חלקן עברו; נכשלו בדיקות תוכן אמיתי בגלל mock — **לחזור על הבדיקות אחרי בנייה מחודשת עם מפתח**. |
-| `weekly-send` | **לא בוצע** בפיילוט הראשון — מומלץ לאחר בנייה מאומתת + ולידציה |
-| קומיט נוסף על `main` | `f9b9dc5` — יישור מחרוזת ברכה ב-mock לשם **בית ולד** (עקביות BUG-1) |
+| `venv`, `pip install`, חבילת `anthropic` | `anthropic` מותקן ב-venv; נוסף ל-[`requirements.txt`](requirements.txt) |
+| מחיקת `data/famely.db` ו-`2026-04-10.html` | בוצע לפני בנייה |
+| `weekly-build` (ללא `--mock`) | **הושלם** — M2: **160** פריטים; **10** נבחרו; מזג אוויר OK; **כל קריאות Claude → 401**; עלות טוקן **$0**; HTML ~**40.6 KB**; **אין** מחרוזות `[Mock response]` (שימוש ב-fallbackים סטטיים ב-`m3`) |
+| ולידציה בסיסית | ראו דוח; `Mock response`: **0** |
+| `weekly-send` | **נכשל** — FTP **530 Login incorrect**; **לא** נשלחו מיילים |
+| ניסוי נפרד עם `UPRESS_*` לנתיב `agents/newsletter` | **530** — אותו כשל התחברות (לא אימתנו נתיב עד סוף) |
 
-**מסקנה (מעודכן):** הצינור הטכני עובד. **מפתח Anthropic מוגדר כעת מקומית ב-`.env`** — יש להריץ **`weekly-build`** שוב (אחרי `rm` ל-DB/HTML הרלוונטיים) כדי לאמת שאין `[Mock response …]` ב-HTML.
+**מסקנה:** יש לתקן **מפתח Anthropic תקף** (401) ו-**התחברות FTP תקפה** (530) לפני מהדורה חיה לראשון.
 
 ---
 
@@ -64,21 +64,22 @@
 
 - **M1 — פרופילים:** טעינת משפחה מ-[`config/family.json`](config/family.json) דרך [`src/m1_profiles.py`](src/m1_profiles.py).
 - **M2 — סריקה:** משיכת RSS/מקורות אמיתיים; בבנייה לדוגמה נאספו עשרות פריטים ממקורות פעילים (חלק מהמקורות נכשלו או החזירו 0 — ראו לוגים).
-- **M3 — נורמליזציה ו-AI:** לוגיקת קיראייט, dedup, גשרים, חידה, סקר — **תלויה ב-Claude**. עם **`ANTHROPIC_API_KEY`** ב-`.env`, [`TokenTracker`](src/token_tracker.py) קורא ל-API; בלעדיו — **mock**.
+- **M3 — נורמליזציה ו-AI:** לוגיקת קיראייט, dedup, גשרים, חידה, סקר — **תלויה ב-Claude**. אם ה-API מחזיר שגיאה (למשל **401**), הקוד נופל ל-**fallbackים** ב-try/except — לא בהכרח mock מ-`token_tracker`.
 - **מזג אוויר:** Open-Meteo (ללא מפתח) — עבד בלוג (פרדס חנה / בזל).
 - **M4 — רינדור:** Jinja2 — [`templates/newsletter.html.j2`](templates/newsletter.html.j2); גרסה [`SYSTEM_VERSION`](src/m4_renderer.py) ו-`build_timestamp`.
-- **M5 — הפצה:** לא הופעל בסבב זה; הקוד ב-[`src/m5_distributor.py`](src/m5_distributor.py) כולל FTP + אימות URL + מייל (ו-WhatsApp לפי הגדרות).
+- **M5 — הפצה:** **נוסה** — נכשל ב-**FTP 530**; הקוד ב-[`src/m5_distributor.py`](src/m5_distributor.py) לא מגיע לשליחת מיילים כשההעלאה נכשלת.
 
 ### 4.2 חסר / סיכונים
 
 | נושא | פירוט |
 |------|--------|
-| **`ANTHROPIC_API_KEY`** | **מוגדר מקומית (אומת).** בשרת CI/ייצור יש לוודא משתנה זהה או secret manager — **לא להעתיק `.env` ל-git** |
-| **התאמת FTP ל-URL ציבורי** | ייתכן פער בין `UPRESS_UPLOAD_PATH` / `UPRESS_PUBLIC_BASE` לבין הנתיב בפועל ב-wordpress (למשל `agents/newsletter/...`) — דורש אימות בשרת |
+| **`ANTHROPIC_API_KEY`** | מוגדר ב-`.env` אך ה-API החזיר **401 Unauthorized** — יש **מפתח לא תקף / בוטל / פרויקט**; לעדכן בקונסולת Anthropic |
+| **FTP / `UPRESS_SFTP_*`** | **530 Login incorrect** — לוודא משתמש/סיסמה בפאנל uPress; האם החשבון נועד לתיקיית `agents/newsletter` או לנתיב אחר? |
+| **התאמת FTP ל-URL ציבורי** | לאחר תיקון login — ליישר `UPRESS_UPLOAD_PATH` + `UPRESS_PUBLIC_BASE` עם מבנה האתר |
 | **קישורים 403 ב-HEAD** | חלק מהאתרים חוסמים בוטים; HEAD ≠ דפדפן — צריך מדיניות בדיקה |
 | **תבנית "character placeholder"** | טקסט/מחלקות שמופיעים ב-grep ל-"placeholder" גם כשההתנהגות הצפויה היא emoji fallback |
 | **צילומי מסך אוטומטיים** | כלי דפדפן IDE — timeout; לא ארטיפקט ויזואלי מלא |
-| **הפצה למשפחה** | לא בוצעה בגלל כשל ולידציית תוכן |
+| **הפצה למשפחה** | **לא בוצעה** — כשל FTP |
 
 ---
 
@@ -131,12 +132,12 @@ flowchart TB
 
 ### 6.1 AI
 
-- [x] `ANTHROPIC_API_KEY` — **מוגדר במחשב המפעיל (אומת מבנה מפתח)** — לחזור על בנייה כדי לייצר HTML ללא mock
+- [ ] `ANTHROPIC_API_KEY` — **מוגדר אבל נדחה ב-API (401)** — להחליף במפתח תקף ולבצע `weekly-build` מחדש
 - [ ] אותו סוד ב**שרת** הבילד (אם שונה מהמחשב המקומי)
 
 ### 6.2 FTP / אתר ציבורי
 
-- [ ] `UPRESS_SFTP_HOST`, `UPRESS_SFTP_USER`, `UPRESS_SFTP_PASS`, `UPRESS_SFTP_PORT` (או aliases ב-[`env_compat.py`](src/env_compat.py))
+- [ ] `UPRESS_SFTP_HOST`, `UPRESS_SFTP_USER`, `UPRESS_SFTP_PASS`, `UPRESS_SFTP_PORT` — **אומתו בפועל: 530** — לתקן פרטי התחברות
 - [ ] `UPRESS_PUBLIC_BASE` — בסיס HTTPS **מדויק** כפי שהמשתמשים רואים (כולל `www` אם נדרש)
 - [ ] `UPRESS_UPLOAD_PATH` — נתיב מרוחק ב-FTP שמתאים ל-URL הציבורי (למשל תיקיית `agents/newsletter` אם זה המבנה ב-uPress)
 
